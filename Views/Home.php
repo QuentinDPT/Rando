@@ -11,30 +11,85 @@
       body{
         margin:0;
       }
+
+      #search-bar{
+        position:fixed;
+        top: 2vh;
+        left: 10vw;
+        right: 10vw;
+        height: 40px;
+        z-index: 1000;
+      }
+
+      #search-bar>*{
+        background-color: white;
+        height:100%;
+        width:800px;
+        max-width: 80vw;
+        border-radius: 20px;
+        padding-left: 15px;
+        padding-right: 15px;
+        display: flex;
+      }
+
+      #search-bar>div>*{
+        background-color: transparent;
+        border: none;
+      }
+      #search-bar>div>#searchText{
+        height:100%;
+        width:800px;
+      }
+      #search-bar>div>#searchBtn{
+        height:100%;
+        width:40px;
+      }
+
+      #pinOption{
+        position:fixed;
+        left:0;
+        top:0;
+        bottom:0;
+        min-width: 15px;
+        max-width: 70vw;
+        z-index: 1001;
+        background-color: red;
+      }
+
+      #pinOption::after{
+        content:"";
+        background-color: #000;
+      }
     </style>
-    <title>Carte</title>
+    <title>Rando</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
-  <body>
-
-
+  <body id="page">
   <div id="map">
   </div>
-  <div id="demo">
+  <div id="search-bar">
+    <div class="">
+      <input id="searchText" type="text" name="" value="" placeholder="Search">
+      <input id="searchBtn" type="button" name="" value="»">
+    </div>
+  </div>
+  <div id="pinOption">
+
   </div>
 
     <!-- Fichiers Javascript -->
     <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
     <script type="text/javascript">
       // On initialise la latitude et la longitude de Paris (centre de la carte)
-      var lat = 48.852969;
-      var lon = 2.349903;
       var macarte = null;
 
 
       var balises = [] ;
+      var balisesPin = [];
       var structures = [] ;
+      var structuresPin = [];
       var sites = [] ;
+      var sitesPin = [];
 
       // Fonction d'initialisation de la carte
       function initMap() {
@@ -47,6 +102,7 @@
           minZoom: 1,
           maxZoom: 17
         }).addTo(macarte);
+        macarte.removeControl(macarte.zoomControl);
 
         getLocation(function(position){
           macarte.setView([position.coords.latitude, position.coords.longitude], 11);
@@ -68,14 +124,14 @@
 
             balises = result;
           	for (balise in balises) {
-
+              /*
               var marker = L.marker(
                   [balises[balise].latitude, balises[balise].longitude],
                   {icon:myIcon}
                 )
                 .addTo(macarte)
                 .bindPopup('Balise');;
-
+              //*/
               /*
               $.ajax({
                 url:"https://data.ffvl.fr/php/historique_relevesmeteo.php?idbalise=83&heures=3" + balises[balise].idBalise + "&heures=3",
@@ -95,56 +151,7 @@
         $.ajax({
           url:"https://data.ffvl.fr/json/structures.json",
           success: function(result){
-            var materiel = L.icon({
-              iconUrl: "/src/img/sac2.png",
-              iconSize: [30, 30],
-              iconAnchor: [15, 30],
-              popupAnchor: [0, -30],
-            });
             structures = result;
-          	for (structure in structures) {
-              switch(structures[structure].TYPE){
-                case "ECOLE":
-                  var marker = L.marker(
-                      [structures[structure].STRU_LATITUDE, structures[structure].STRU_LONGITUDE],
-                      {icon:materiel}
-                    )
-                    .addTo(macarte)
-                    .bindPopup("École<br>" + structures[structure].STRU_NOM);
-                  break ;
-                case "CLUB":
-                  var marker = L.marker(
-                      [structures[structure].STRU_LATITUDE, structures[structure].STRU_LONGITUDE],
-                      {icon:materiel}
-                    )
-                    .addTo(macarte)
-                    .bindPopup("Club<br>" + structures[structure].STRU_NOM);
-                  break ;
-                case "CLUB-ECOLE":
-                  var marker = L.marker(
-                      [structures[structure].STRU_LATITUDE, structures[structure].STRU_LONGITUDE],
-                      {icon:materiel}
-                    )
-                    .addTo(macarte)
-                    .bindPopup("Club & école<br>" + structures[structure].STRU_NOM);
-                  break ;
-                case "EDUCATION NATIONALE":
-                  var marker = L.marker(
-                      [structures[structure].STRU_LATITUDE, structures[structure].STRU_LONGITUDE],
-                      {icon:materiel}
-                    )
-                    .addTo(macarte)
-                    .bindPopup("École scolaire<br>" + structures[structure].STRU_NOM);
-                  break ;
-                default:
-                  var marker = L.marker(
-                      [structures[structure].STRU_LATITUDE, structures[structure].STRU_LONGITUDE],
-                      {icon:materiel}
-                    )
-                    .addTo(macarte)
-                    .bindPopup(structures[structure].TYPE + "<br>" +structures[structure].STRU_NOM);
-              }
-          	}
           }
         }) ;
 
@@ -152,56 +159,12 @@
         $.ajax({
           url:"https://data.ffvl.fr/json/sites.json",
           success: function(result){
-            var iconSimple = L.icon({
-              iconUrl: "/src/img/site.png",
-              iconSize: [30, 30],
-              iconAnchor: [15, 30],
-              popupAnchor: [0, -30],
-            });
-            var iconDeco = L.icon({
-              iconUrl: "/src/img/site-deco.png",
-              iconSize: [30, 30],
-              iconAnchor: [15, 30],
-              popupAnchor: [0, -30],
-            });
-            var iconAttero = L.icon({
-              iconUrl: "/src/img/site-attero.png",
-              iconSize: [30, 30],
-              iconAnchor: [15, 30],
-              popupAnchor: [0, -30],
-            });
-
             sites = result;
-          	for (site in sites) {
-              if(sites[site].site_sous_type == "Décollage"){
-                var marker = L.marker(
-                    [sites[site].lat, sites[site].lon],
-                    {icon:iconDeco}
-                  )
-                  .addTo(macarte)
-                  .bindPopup(sites[site].nom + "<br>" + sites[site].pratiques);
-              }else if(sites[site].site_sous_type == "Atterrissage"){
-                var marker = L.marker(
-                    [sites[site].lat, sites[site].lon],
-                    {icon:iconAttero}
-                  )
-                  .addTo(macarte)
-                  .bindPopup(sites[site].nom + "<br>" + sites[site].pratiques);
-              }else{
-                var marker = L.marker(
-                    [sites[site].lat, sites[site].lon],
-                    {icon:iconSimple}
-                  )
-                  .addTo(macarte)
-                  .bindPopup(sites[site].site_sous_type + "<br>" + sites[site].nom + "<br>" + sites[site].pratiques);
-              }
-          	}
           }
         }) ;
         //*
       	// Nous parcourons la liste des villes
         //*/
-
       }
 
       function getLocation(fct) {
@@ -217,5 +180,181 @@
         initMap();
       };
     </script>
+    <script type="text/javascript">
+      function showStructures(){
+        if(structuresPin.length != 0)
+          return ;
+        var materiel = L.icon({
+          iconUrl: "/src/img/sac2.png",
+          iconSize: [30, 30],
+          iconAnchor: [15, 30],
+          popupAnchor: [0, -30],
+        });
+        for (structure in structures) {
+          switch(structures[structure].TYPE){
+            case "ECOLE":
+              var marker = L.marker(
+                  [structures[structure].STRU_LATITUDE, structures[structure].STRU_LONGITUDE],
+                  {icon:materiel}
+                )
+                .addTo(macarte)
+                .bindPopup("École<br>" + structures[structure].STRU_NOM);
+              structuresPin.push(marker) ;
+              break ;
+            case "CLUB":
+              var marker = L.marker(
+                  [structures[structure].STRU_LATITUDE, structures[structure].STRU_LONGITUDE],
+                  {icon:materiel}
+                )
+                .addTo(macarte)
+                .bindPopup("Club<br>" + structures[structure].STRU_NOM);
+              structuresPin.push(marker) ;
+              break ;
+            case "CLUB-ECOLE":
+              var marker = L.marker(
+                  [structures[structure].STRU_LATITUDE, structures[structure].STRU_LONGITUDE],
+                  {icon:materiel}
+                )
+                .addTo(macarte)
+                .bindPopup("Club & école<br>" + structures[structure].STRU_NOM);
+              structuresPin.push(marker) ;
+              break ;
+            case "EDUCATION NATIONALE":
+              var marker = L.marker(
+                  [structures[structure].STRU_LATITUDE, structures[structure].STRU_LONGITUDE],
+                  {icon:materiel}
+                )
+                .addTo(macarte)
+                .bindPopup("École scolaire<br>" + structures[structure].STRU_NOM);
+              structuresPin.push(marker) ;
+              break ;
+            default:
+              var marker = L.marker(
+                  [structures[structure].STRU_LATITUDE, structures[structure].STRU_LONGITUDE],
+                  {icon:materiel}
+                )
+                .addTo(macarte)
+                .bindPopup(structures[structure].TYPE + "<br>" +structures[structure].STRU_NOM);
+              structuresPin.push(marker) ;
+          }
+        }
+      }
+
+      function hideStructures(){
+        for (var pin of structuresPin) {
+          pin.remove();
+        }
+        structuresPin = [] ;
+      }
+
+      function showBalises(){
+        if(balisesPin.length != 0)
+          return;
+        var myIcon = L.icon({
+          iconUrl: "/src/img/balise.png",
+          iconSize: [30, 30],
+          iconAnchor: [15, 30],
+          popupAnchor: [0, -30],
+        });
+      	for (balise in balises) {
+          var marker = L.marker(
+              [balises[balise].latitude, balises[balise].longitude],
+              {icon:myIcon}
+            )
+            .addTo(macarte)
+            .bindPopup('Balise');
+          balisesPin.push(marker);
+      	}
+      }
+
+      function hideBalises(){
+        for (var pin of balisesPin) {
+          pin.remove();
+        }
+        balisesPin = [] ;
+      }
+
+      function showSites(){
+        if(sitesPin.length != 0)
+          return;
+
+        var iconSimple = L.icon({
+          iconUrl: "/src/img/site.png",
+          iconSize: [30, 30],
+          iconAnchor: [15, 30],
+          popupAnchor: [0, -30],
+        });
+        var iconDeco = L.icon({
+          iconUrl: "/src/img/site-deco.png",
+          iconSize: [30, 30],
+          iconAnchor: [15, 30],
+          popupAnchor: [0, -30],
+        });
+        var iconAttero = L.icon({
+          iconUrl: "/src/img/site-attero.png",
+          iconSize: [30, 30],
+          iconAnchor: [15, 30],
+          popupAnchor: [0, -30],
+        });
+
+        for (site in sites) {
+          if(sites[site].site_sous_type == "Décollage"){
+            var marker = L.marker(
+                [sites[site].lat, sites[site].lon],
+                {icon:iconDeco}
+              )
+              .addTo(macarte)
+              .bindPopup(sites[site].nom + "<br>" + sites[site].pratiques);
+            sitesPin.push(marker);
+          }else if(sites[site].site_sous_type == "Atterrissage"){
+            var marker = L.marker(
+                [sites[site].lat, sites[site].lon],
+                {icon:iconAttero}
+              )
+              .addTo(macarte)
+              .bindPopup(sites[site].nom + "<br>" + sites[site].pratiques);
+            sitesPin.push(marker);
+          }else{
+            var marker = L.marker(
+                [sites[site].lat, sites[site].lon],
+                {icon:iconSimple}
+              )
+              .addTo(macarte)
+              .bindPopup(sites[site].site_sous_type + "<br>" + sites[site].nom + "<br>" + sites[site].pratiques);
+            sitesPin.push(marker);
+          }
+        }
+      }
+
+      function hideSites(){
+          for (var pin of sitesPin) {
+            pin.remove();
+          }
+          sitesPin = [] ;
+      }
+    </script>
+    <script type="text/javascript">
+      document.getElementByID("search-bar");
+
+    </script>
+
+    <?php
+    if($isMobile){
+    ?>
+      <script type="text/javascript">
+        var elem = document.getElementById("page");
+        function openFullscreen() {
+          if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+          } else if (elem.webkitRequestFullscreen) { /* Safari */
+            elem.webkitRequestFullscreen();
+          } else if (elem.msRequestFullscreen) { /* IE11 */
+            elem.msRequestFullscreen();
+          }
+        }
+        openFullscreen();
+      </script>
+    <?php }else{ ?>
+    <?php } ?>
   </body>
 </html>

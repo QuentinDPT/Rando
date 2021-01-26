@@ -1,4 +1,5 @@
 <?php
+echo "<!--" ;
 $PageTitle = "Rando" ;
 $UrlHashed = explode("/",$_SERVER['REQUEST_URI']) ;
 
@@ -6,6 +7,10 @@ require("app.config.php") ;
 
 $ProjectForder = "hey" ;
 $FolderFilter = "" ;
+
+$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
+$isMobile = is_numeric(strpos($ua, "mobile"));
+
 
 switch($UrlHashed[1]){
   case "home" :
