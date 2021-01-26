@@ -18,7 +18,7 @@
         left: 10vw;
         right: 10vw;
         height: 40px;
-        z-index: 1000;
+        z-index: 1002;
       }
 
       #search-bar>*{
@@ -83,9 +83,18 @@
         margin-top: -50%;
         margin-bottom: -50%;
       }
-      .expandOption{
+
+      #pinOption:hover, .expandOption{
         width:600px;
         background-color: #FFFFFFEE;
+      }
+
+      #pinOption>*{
+        transform: translateX(-600px);
+        transition: .2s;
+      }
+      #pinOption:hover>*{
+        transform: translateX(0);
       }
     </style>
     <title>Rando</title>
@@ -102,7 +111,12 @@
     </div>
   </div>
   <div id="pinOption" class="pinOption">
-
+    <h2>Options</h2>
+    <ul>
+      <li><label for="sitesCheckbox">Sites</label><input type="checkbox" id="sitesCheckbox" name="sitesCheckbox"></li>
+      <li><label for="structuresCheckbox">Structures</label><input type="checkbox" id="structuresCheckbox" name="structuresCheckbox"></li>
+      <li><label for="balisesCheckbox">Balises</label><input type="checkbox" id="balisesCheckbox" name="balisesCheckbox"></li>
+    </ul>
   </div>
 
     <!-- Fichiers Javascript -->
@@ -209,6 +223,32 @@
     </script>
     <!-- Pin actions -->
     <script type="text/javascript">
+      document.getElementById("sitesCheckbox").onclick = toggleSites ;
+      document.getElementById("structuresCheckbox").onclick = toggleStructures ;
+      document.getElementById("balisesCheckbox").onclick = toggleBalises ;
+
+      function toggleStructures(){
+        if(structuresPin.length != 0)
+          hideStructures();
+        else
+          showStructures();
+      }
+
+      function toggleBalises(){
+        if(balisesPin.length != 0)
+          hideBalises();
+        else
+          showBalises();
+      }
+
+      function toggleSites(){
+        if(sitesPin.length != 0)
+          hideSites();
+        else
+          showSites();
+      }
+
+
       function showStructures(){
         if(structuresPin.length != 0)
           return ;
@@ -386,6 +426,7 @@
     </script>
     <!-- Option menu -->
     <script type="text/javascript">
+      /*
       var option = document.getElementById("pinOption");
       var optionInit = function(){
         option.onclick = function(e){
@@ -405,6 +446,7 @@
         }
       }
       optionInit() ;
+      */
     </script>
 
 
