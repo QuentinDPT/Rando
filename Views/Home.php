@@ -55,7 +55,7 @@
         position: fixed;
         top: 0;
         bottom: 0;
-        min-width: 15px;
+        min-width: 20px;
         max-width: 70vw;
         z-index: 1001;
         transition: .3s;
@@ -63,7 +63,7 @@
 
       .pinOption{
         width: 15px;
-        background-color: #FFFFFF00;
+        background-color: #FFFFFF01;
       }
 
       #pinOption::after{
