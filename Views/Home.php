@@ -353,7 +353,9 @@
             elem.msRequestFullscreen();
           }
         }
-        openFullscreen();
+        document.onmousedown = function(){
+          openFullscreen();
+        }
       </script>
     <?php }else{ ?>
     <?php } ?>
