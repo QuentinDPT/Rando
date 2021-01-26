@@ -24,7 +24,13 @@
       #search-bar>*{
         background-color: white;
         height:100%;
+        <?php
+        if(!$isMobile){
+        ?>
         width:800px;
+        <?php
+        }
+        ?>
         max-width: 80vw;
         border-radius: 20px;
         padding-left: 15px;
