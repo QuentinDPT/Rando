@@ -18,8 +18,10 @@
   <body>
 
 
-    <div id="map">
-    </div>
+  <div id="map">
+  </div>
+  <div id="demo">
+  </div>
 
     <!-- Fichiers Javascript -->
     <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
@@ -37,14 +39,18 @@
       // Fonction d'initialisation de la carte
       function initMap() {
         // Créer l'objet "macarte" et l'insèrer dans l'élément HTML qui a l'ID "map"
-        macarte = L.map('map').setView([lat, lon], 11);
+        macarte = L.map('map').setView([46.976752, 2.650834], 6);
         // Leaflet ne récupère pas les cartes (tiles) sur un serveur par défaut. Nous devons lui préciser où nous souhaitons les récupérer. Ici, openstreetmap.fr
         L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
           // Il est toujours bien de laisser le lien vers la source des données
           attribution: 'rendu <a href="//openstreetmap.fr">OSM France</a>',
           minZoom: 1,
-          maxZoom: 20
+          maxZoom: 17
         }).addTo(macarte);
+
+        getLocation(function(position){
+          macarte.setView([position.coords.latitude, position.coords.longitude], 11);
+        });
 
 
         //*
@@ -195,6 +201,15 @@
         //*
       	// Nous parcourons la liste des villes
         //*/
+
+      }
+
+      function getLocation(fct) {
+       if (navigator.geolocation) {
+         navigator.geolocation.getCurrentPosition(fct);
+       } else {
+         alert("Geolocation is not supported by this browser.");
+       }
       }
 
       window.onload = function(){
