@@ -53,12 +53,15 @@
         min-width: 15px;
         max-width: 70vw;
         z-index: 1001;
-        background-color: red;
       }
 
       #pinOption::after{
         content:"";
-        background-color: #000;
+        display:inline-block;
+        width:5px;
+        height:30px;
+        border-radius: 2px;
+        background-color: #66666696;
       }
     </style>
     <title>Rando</title>
@@ -84,7 +87,6 @@
       // On initialise la latitude et la longitude de Paris (centre de la carte)
       var macarte = null;
 
-
       var balises = [] ;
       var balisesPin = [];
       var structures = [] ;
@@ -108,7 +110,6 @@
         getLocation(function(position){
           macarte.setView([position.coords.latitude, position.coords.longitude], 11);
         });
-
 
         //*
         // Balises
@@ -335,8 +336,26 @@
       }
     </script>
     <script type="text/javascript">
-      document.getElementByID("search-bar");
+      function searchEngines(){
+        var searchText = document.getElementById("searchText");
+        var searchBtn = document.getElementById("searchBtn");
 
+        var search = function(){
+          $.ajax({
+            url:"https://api-adresse.data.gouv.fr/search/?q="+searchText.value.replace(" ","+"),
+            success: function(result){
+              console.log(result);
+              macarte.setView([result.features[0].geometry.coordinates[1], result.features[0].geometry.coordinates[0]], 12);
+            }
+          }) ;
+
+        }
+
+        searchBtn.onclick = search ;
+        searchText.onchange = search ;
+        searchText.onkeydown = function(e){ if(e.key == 13){ search(); } } ;
+      }
+      searchEngines() ;
     </script>
 
     <?php
