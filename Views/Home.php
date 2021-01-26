@@ -52,22 +52,40 @@
       }
 
       #pinOption{
-        position:fixed;
-        left:0;
-        top:0;
-        bottom:0;
+        position: fixed;
+        top: 0;
+        bottom: 0;
         min-width: 15px;
         max-width: 70vw;
         z-index: 1001;
+        transition: .3s;
+      }
+
+      .pinOption{
+        width: 15px;
+        background-color: #FFFFFF00;
       }
 
       #pinOption::after{
-        content:"";
-        display:inline-block;
-        width:5px;
-        height:30px;
-        border-radius: 2px;
+        content: "";
+        position: absolute;
+        display: inline-block;
+
         background-color: #66666696;
+        border-radius: 2px;
+
+        width: 5px;
+        height: 30px;
+
+        right: 5px;
+        top: 50%;
+        bottom: 50%;
+        margin-top: -50%;
+        margin-bottom: -50%;
+      }
+      .expandOption{
+        width:600px;
+        background-color: #FFFFFFEE;
       }
     </style>
     <title>Rando</title>
@@ -83,12 +101,13 @@
       <input id="searchBtn" type="button" name="" value="»">
     </div>
   </div>
-  <div id="pinOption">
+  <div id="pinOption" class="pinOption">
 
   </div>
 
     <!-- Fichiers Javascript -->
     <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
+    <!-- Map Init data fetch -->
     <script type="text/javascript">
       // On initialise la latitude et la longitude de Paris (centre de la carte)
       var macarte = null;
@@ -188,6 +207,7 @@
         initMap();
       };
     </script>
+    <!-- Pin actions -->
     <script type="text/javascript">
       function showStructures(){
         if(structuresPin.length != 0)
@@ -341,6 +361,7 @@
           sitesPin = [] ;
       }
     </script>
+    <!-- Search engine initialisation -->
     <script type="text/javascript">
       function searchEngines(){
         var searchText = document.getElementById("searchText");
@@ -363,6 +384,29 @@
       }
       searchEngines() ;
     </script>
+    <!-- Option menu -->
+    <script type="text/javascript">
+      var option = document.getElementById("pinOption");
+      var optionInit = function(){
+        option.onclick = function(e){
+          console.log(e) ;
+          if(option.classList.contains("expandOption"))
+            option.retract() ;
+          else
+            option.expand() ;
+        }
+
+        option.expand = function(){
+          this.classList.add("expandOption");
+        }
+
+        option.retract = function(){
+          this.classList.remove("expandOption");
+        }
+      }
+      optionInit() ;
+    </script>
+
 
     <?php
     if($isMobile){
