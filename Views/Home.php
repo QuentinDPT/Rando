@@ -5,6 +5,37 @@
     <!-- Nous chargeons les fichiers CDN de Leaflet. Le CSS AVANT le JS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin="" />
     <style type="text/css">
+      #logSection{
+        position:fixed;
+        z-index: 1002 ;
+        bottom:0;
+        right:0;
+        padding-bottom: 1.5rem;
+        padding-right: .5rem;
+      }
+
+      #signout{
+        height:36px;
+        min-width:120px;
+        display:inline-flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: white;
+        border-radius: 0 25px 25px 0 ;
+        width: 100%;
+      }
+
+      #signout>span{
+
+      }
+
+      #signout>img{
+        max-width: 50px;
+        max-height: 50px;
+        margin-top: -50%;
+        margin-bottom: -50%;
+      }
+
       #map{ /* la carte DOIT avoir une hauteur sinon elle n'apparaît pas */
         height:100vh;
       }
@@ -123,8 +154,10 @@
       <li><label for="structuresCheckbox">Structures</label><input type="checkbox" id="structuresCheckbox" name="structuresCheckbox"></li>
       <li><label for="balisesCheckbox">Balises</label><input type="checkbox" id="balisesCheckbox" name="balisesCheckbox"></li>
     </ul>
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
-
+  </div>
+  <div id="logSection">
+    <div id="signin" class="g-signin2" data-onsuccess="onSignIn"></div>
+    <div id="signout" style="display:none;" onclick="signOut()"><span style="font-size: 13px; line-height: 34px;color: #757575;" class="abcRioButtonContents">Sign out</span><img src='/src/img/balise.png'></div>
   </div>
 
     <!-- Fichiers Javascript -->
