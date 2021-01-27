@@ -179,6 +179,44 @@
       function initMap() {
         // Créer l'objet "macarte" et l'insèrer dans l'élément HTML qui a l'ID "map"
         macarte = L.map('map').setView([46.976752, 2.650834], 6);
+
+        var basemaps = {
+          Satellite: L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoia3J5cHRvcyIsImEiOiJja2tmcW94YmswZmtlMm9teXh0b2oyd200In0.WyYX3XtfCzn7-IoNJHQnHw', {
+            layers: 'Satelite-WMS'
+          }),
+
+          'OSM': L.tileLayer("https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png",{
+            layers: 'OSM-WMS'
+          }),
+
+          'OSM relief': L.tileLayer("https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png",{
+            layers: 'OSM-Relief'
+          }),
+
+          Topography: L.tileLayer.wms('http://ows.mundialis.de/services/service?', {
+            layers: 'TOPO-WMS'
+          }),
+
+          Places: L.tileLayer.wms('http://ows.mundialis.de/services/service?', {
+            layers: 'OSM-Overlay-WMS'
+          }),
+
+          'Satelite & places': L.tileLayer.wms('http://ows.mundialis.de/services/service?', {
+            layers: 'Satelite-WMS,TOPO-WMS'
+          }),
+
+          'Topography & places': L.tileLayer.wms('http://ows.mundialis.de/services/service?', {
+            layers: 'TOPO-WMS,OSM-Overlay-WMS'
+          })
+        };
+
+        L.control.layers(basemaps).addTo(macarte);
+        /*
+        basemaps.Topography.addTo(map);
+        var tms_example = L.tileLayer.wms('http://base_url/tms/1.0.0/example_layer@png/{z}/{x}/{y}.png', {
+          tms: true
+        }).addTo(map);
+        */
         // Leaflet ne récupère pas les cartes (tiles) sur un serveur par défaut. Nous devons lui préciser où nous souhaitons les récupérer. Ici, openstreetmap.fr
         L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
           // Il est toujours bien de laisser le lien vers la source des données
