@@ -34,6 +34,7 @@
         max-height: 50px;
         margin-top: -50%;
         margin-bottom: -50%;
+        border-radius: 50%;
       }
 
       #map{ /* la carte DOIT avoir une hauteur sinon elle n'apparaît pas */
