@@ -97,6 +97,12 @@
         transform: translateX(0);
       }
     </style>
+
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="732812529798-lq9el2petok7s998v71jrmrkmur6c61u.apps.googleusercontent.com">
+
+    <script src="/src/js/glog.js" charset="utf-8"></script>
+
     <title>Rando</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -117,6 +123,8 @@
       <li><label for="structuresCheckbox">Structures</label><input type="checkbox" id="structuresCheckbox" name="structuresCheckbox"></li>
       <li><label for="balisesCheckbox">Balises</label><input type="checkbox" id="balisesCheckbox" name="balisesCheckbox"></li>
     </ul>
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
   </div>
 
     <!-- Fichiers Javascript -->
