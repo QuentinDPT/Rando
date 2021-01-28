@@ -319,7 +319,7 @@
                 popupAnchor: [0, -30],
               });
             }
-            var userMarker = L.marker(
+            userMarker = L.marker(
                 [structures[structure].STRU_LATITUDE, structures[structure].STRU_LONGITUDE],
                 {icon:materiel}
               )
