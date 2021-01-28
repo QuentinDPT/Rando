@@ -307,16 +307,16 @@
             if(GUser != null && GUser.avatar != null && GUser.avatar != ""){
               userIcon = L.icon({
                 iconUrl: GUser.avatar,
-                iconSize: [30, 30],
-                iconAnchor: [15, 30],
-                popupAnchor: [0, -30],
+                iconSize: [60, 60],
+                iconAnchor: [30, 30],
+                popupAnchor: [0, 0],
               });
             }else{
               userIcon = L.icon({
                 iconUrl: "/src/img/bobby.png",
-                iconSize: [30, 30],
-                iconAnchor: [15, 30],
-                popupAnchor: [0, -30],
+                iconSize: [60, 60],
+                iconAnchor: [30, 30],
+                popupAnchor: [0, 0],
               });
             }
             userMarker = L.marker(
