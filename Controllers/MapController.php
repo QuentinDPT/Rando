@@ -2,9 +2,9 @@
 
 $token = 'pk.eyJ1Ijoia3J5cHRvcyIsImEiOiJja2tmcW94YmswZmtlMm9teXh0b2oyd200In0.WyYX3XtfCzn7-IoNJHQnHw';
 $last = $UrlHashed[5] ;
-$pos = strpos($last, '?') ;
-if($pos !== false)
-  $last = substr($last, 0, pos) ;
+$pos__ = strpos($last, '?') ;
+if($pos__ !== false)
+  $last = substr($last, 0, $pos__) ;
 $name = './src/maps/'.$UrlHashed[3].'-'.$UrlHashed[4].'-'.$last.'.png';
 
 if(!file_exists($name)){
