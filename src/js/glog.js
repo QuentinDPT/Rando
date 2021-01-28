@@ -2,7 +2,7 @@ gapi.load("auth2",function(){
 
 })
 
-var GUser = null ;
+var GUser = {id:null,name:null,avatar:null,mail:null} ;
 
 function onSignIn(googleUser) {
   var profile = googleUser.getBasicProfile();
