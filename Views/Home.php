@@ -157,6 +157,7 @@
     </ul>
   </div>
   <div id="logSection">
+    <div><input type="button" name="" style="width:120px;height:36px;border:none;margin-bottom:.2rem; background-color:white;" value="Recentrer" onclick="centerize();"></div>
     <div id="signin" class="g-signin2" data-onsuccess="onSignIn"></div>
     <div id="signout" style="display:none;" onclick="signOut()"><span style="font-size: 13px; line-height: 34px;color: #757575;" class="abcRioButtonContents">Sign out</span><img src='/src/img/balise.png'></div>
   </div>
@@ -168,6 +169,8 @@
       // On initialise la latitude et la longitude de Paris (centre de la carte)
       var macarte = null;
 
+      var userMarker = null;
+      var userLocation = {lat:0,lon:0};
       var balises = [] ;
       var balisesPin = [];
       var structures = [] ;
@@ -185,7 +188,7 @@
             layers: 'Satelite-WMS'
           }),
 
-          "Satellite Clone": L.tileLayer('https://rando.depotter.fr/api/map/{z}/{x}/{y}', {
+          "Satellite Clone": L.tileLayer.wms('https://rando.depotter.fr/api/map/{z}/{x}/{y}', {
             layers: 'SateliteClone-WMS'
           }),
 
@@ -206,7 +209,7 @@
           }),
 
           'Satelite & places': L.tileLayer.wms('http://ows.mundialis.de/services/service?', {
-            layers: 'Satelite-WMS,TOPO-WMS'
+            layers: 'SateliteClone-WMS,TOPO-WMS'
           }),
 
           'Topography & places': L.tileLayer.wms('http://ows.mundialis.de/services/service?', {
@@ -222,17 +225,13 @@
         }).addTo(map);
         */
         // Leaflet ne récupère pas les cartes (tiles) sur un serveur par défaut. Nous devons lui préciser où nous souhaitons les récupérer. Ici, openstreetmap.fr
-        L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
-          // Il est toujours bien de laisser le lien vers la source des données
-          attribution: 'rendu <a href="//openstreetmap.fr">OSM France</a>',
+        L.tileLayer('https://rando.depotter.fr/api/map/{z}/{x}/{y}', {
           minZoom: 1,
           maxZoom: 17
         }).addTo(macarte);
         macarte.removeControl(macarte.zoomControl);
 
-        getLocation(function(position){
-          macarte.setView([position.coords.latitude, position.coords.longitude], 11);
-        });
+        centerize();
 
         //*
         // Balises
@@ -290,6 +289,43 @@
         //*
       	// Nous parcourons la liste des villes
         //*/
+      }
+
+
+      function centerize(){
+        if(userLocation.lat != 0 && userLocation.lon != 0)
+          macarte.setView([userLocation.lat, userLocation.lon], 11);
+        getLocation(function(position){
+          if(userLocation.lat == 0 && userLocation.lon == 0)
+            macarte.setView([position.coords.latitude, position.coords.longitude], 11);
+          userLocation.lat = position.coords.latitude;
+          userLocation.lon = position.coords.longitude;
+          if(userMarker != null){
+            var userIcon ;
+            if(GUser != null && GUser.avatar != null && GUser.avatar != ""){
+              userIcon = L.icon({
+                iconUrl: GUser.avatar,
+                iconSize: [30, 30],
+                iconAnchor: [15, 30],
+                popupAnchor: [0, -30],
+              });
+            }else{
+              userIcon = L.icon({
+                iconUrl: "/src/img/bobby.png",
+                iconSize: [30, 30],
+                iconAnchor: [15, 30],
+                popupAnchor: [0, -30],
+              });
+            }
+            var userMarker = L.marker(
+                [structures[structure].STRU_LATITUDE, structures[structure].STRU_LONGITUDE],
+                {icon:materiel}
+              )
+              .addTo(macarte);
+          }else{
+            userMarker;
+          }
+        });
       }
 
       function getLocation(fct) {

@@ -2,12 +2,19 @@ gapi.load("auth2",function(){
 
 })
 
+var GUser = null ;
+
 function onSignIn(googleUser) {
   var profile = googleUser.getBasicProfile();
   console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
   console.log('Name: ' + profile.getName());
   console.log('Image URL: ' + profile.getImageUrl());
   console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+
+  GUser.id = profile.getId();
+  GUser.name = profile.getName();
+  GUser.avatar = profile.getImageUrl();
+  GUser.mail = profile.getEmail();
 
   document.getElementById("signin").style.display = "none" ;
   document.getElementById("signout").style.display = "" ;
