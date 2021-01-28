@@ -319,13 +319,14 @@
                 popupAnchor: [0, -30],
               });
             }
+            userMarker._icon.style.borderRadius = "50%" ;
             userMarker = L.marker(
                 [userLocation.lat, userLocation.lon],
                 {icon:userIcon}
               )
               .addTo(macarte);
           }else{
-            userMarker;
+            userMarker.setLatLng([userLocation.lat, userLocation.lon]);
           }
         });
       }
