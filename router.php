@@ -1,9 +1,7 @@
 <?php
-echo "<!--" ;
+
 $PageTitle = "Rando" ;
 $UrlHashed = explode("/",$_SERVER['REQUEST_URI']) ;
-
-require("app.config.php") ;
 
 $ProjectForder = "hey" ;
 $FolderFilter = "" ;
@@ -32,6 +30,9 @@ switch($UrlHashed[1]){
       die() ;
     }
     switch($UrlHashed[2]){
+      case "map":
+        require("./Controllers/MapController.php") ;
+        break ;
       default:
         header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
         $PageTitle .= " - Il est où ?" ;

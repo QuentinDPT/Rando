@@ -1,4 +1,1 @@
 <?
-
-$ProjectForder = "hey" ;
-$FolderFilter = "" ;

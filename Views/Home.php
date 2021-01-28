@@ -185,6 +185,10 @@
             layers: 'Satelite-WMS'
           }),
 
+          "Satellite Clone": L.tileLayer('http://localhost/api/map/{z}/{x}/{y}', {
+            layers: 'SateliteClone-WMS'
+          }),
+
           'OSM': L.tileLayer("https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png",{
             layers: 'OSM-WMS'
           }),
