@@ -132,7 +132,9 @@
 
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <meta name="google-signin-client_id" content="732812529798-lq9el2petok7s998v71jrmrkmur6c61u.apps.googleusercontent.com">
-
+    <script type="text/javascript">
+      var GUser = {id:"",name:"",avatar:"",mail:""} ;
+    </script>
     <script src="/src/js/glog.js" charset="utf-8"></script>
 
     <title>Rando</title>
