@@ -302,7 +302,7 @@
             macarte.setView([position.coords.latitude, position.coords.longitude], 11);
           userLocation.lat = position.coords.latitude;
           userLocation.lon = position.coords.longitude;
-          if(userMarker != null){
+          if(userMarker != undefined){
             var userIcon ;
             if(GUser != null && GUser.avatar != null && GUser.avatar != ""){
               userIcon = L.icon({
