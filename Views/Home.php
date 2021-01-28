@@ -185,7 +185,7 @@
             layers: 'Satelite-WMS'
           }),
 
-          "Satellite Clone": L.tileLayer('http://localhost/api/map/{z}/{x}/{y}', {
+          "Satellite Clone": L.tileLayer('https://rando.depotter.fr/api/map/{z}/{x}/{y}', {
             layers: 'SateliteClone-WMS'
           }),
 
