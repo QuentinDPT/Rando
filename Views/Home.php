@@ -190,6 +190,10 @@
             layers: 'Satelite-WMS'
           }),
 
+          Sat: L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",{
+            layers: 'Sat-WMS'
+          }),
+
           "Satellite Clone": L.tileLayer.wms('https://rando.depotter.fr/api/map/{z}/{x}/{y}', {
             layers: 'SateliteClone-WMS'
           }),

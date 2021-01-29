@@ -13,6 +13,12 @@ if($arg == "reload" && file_exists($name)){
   unlink( $name ) ;
 }
 
+if($UrlHashed[3] > 10){
+  header("Location: https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/".$UrlHashed[3]."/".$last."/".$UrlHashed[4]);
+  die();
+}
+
+
 if(!file_exists($name)){
   $url = 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/'.$UrlHashed[3].'/'.$UrlHashed[4].'/'.$last.'?access_token='.$token;
   $data = array('name' => $name);
