@@ -1,5 +1,5 @@
 function openInFullScreen(){
-  var elem = document.getElementsByTagName("body")[0];
+  var elem = document.getElementsById("map");
   function openFullscreen() {
     if (elem.requestFullscreen) {
       elem.requestFullscreen();
@@ -11,4 +11,4 @@ function openInFullScreen(){
   }
 }
 
-document.onclick = openInFullScreen ;
+document.getElementsById("map").onclick = openInFullScreen ;
