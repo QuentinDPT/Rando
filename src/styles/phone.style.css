@@ -1,5 +1,5 @@
 
-#pinOption{
+.pinOption{
   position: fixed;
   top: 0;
   bottom: 0;
@@ -9,17 +9,32 @@
   z-index: 1001;
 }
 
+.pinOption>div{
+  display: none;
+  margin-top: 10vh;
+  margin-left: 10px;
+}
+
+.pinOption>div>*{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.pinOption>div>ul{
+  list-style: none;
+  padding-left: 10px;
+}
+
 .pinOption{
   width: 15px;
   background-color: #FFFFFF11;
 }
 
-#pinOption::after{
+.pinOption::after{
   content: "";
   position: absolute;
-  display: inline-block;
 
-  background-color: #66666696;
+  background-color: #FFFFFFFF;
   border-radius: 2px;
 
   width: 5px;
@@ -34,10 +49,12 @@
 
 .expandOption{
   width:600px;
-  background-color: #FFFFFFEE;
+  background-color: #FFFFFFAA;
+}
+.expandOption::after{
+  display:none;
 }
 
-#pinOption>*{
-}
-#pinOption:hover>*{
+.expandOption>div{
+  display:block;
 }

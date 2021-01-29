@@ -8,12 +8,14 @@
   </div>
 </div>
 <div id="pinOption" class="pinOption">
-  <h2>Options</h2>
-  <ul>
-    <li><label for="sitesCheckbox">Sites</label><input type="checkbox" id="sitesCheckbox" name="sitesCheckbox"></li>
-    <li><label for="structuresCheckbox">Structures</label><input type="checkbox" id="structuresCheckbox" name="structuresCheckbox"></li>
-    <li><label for="balisesCheckbox">Balises</label><input type="checkbox" id="balisesCheckbox" name="balisesCheckbox"></li>
-  </ul>
+  <div>
+    <h2>Options</h2>
+    <ul>
+      <li><label for="sitesCheckbox">Sites</label><input type="checkbox" id="sitesCheckbox" name="sitesCheckbox"></li>
+      <li><label for="structuresCheckbox">Structures</label><input type="checkbox" id="structuresCheckbox" name="structuresCheckbox"></li>
+      <li><label for="balisesCheckbox">Balises</label><input type="checkbox" id="balisesCheckbox" name="balisesCheckbox"></li>
+    </ul>
+  </div>
 </div>
 <div id="logSection">
   <div id="recenterizeBtn" style="display:none;"><input type="button" name="" style="width:120px;height:36px;border:none;margin-bottom:.2rem; background-color:white;" value="Recentrer" onclick="centerize();"></div>

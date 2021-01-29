@@ -1,27 +1,32 @@
 
 var XOffset = 0 ;
+var XOffset2 = 0 ;
+var touchinitiated = false;
+
 
 window.addEventListener("load", function(e) {
-  document.getElementById("pinOption").onmousedown = function(e){
-    XOffset = e.layerX ;
+  document.getElementById("pinOption").ontouchstart = function(e){
+    touchinitiated = true;
+    XOffset = -(window.innerWidth - e.changedTouches[0].clientX - document.getElementById("pinOption").offsetWidth);
+    XOffset2 = e.changedTouches[0].clientX ;
     document.getElementById("pinOption").style.transition = "" ;
-    document.onmousemove = function(ev){
-      document.getElementById("pinOption").classList.add("expandOption");
-      document.getElementById("pinOption").style.width = (window.innerWidth - ev.clientX + XOffset) + "px" ;
+    document.ontouchmove = function(ev){
+      //document.getElementById("pinOption").classList.add("expandOption");
+      document.getElementById("pinOption").style.width = (window.innerWidth - ev.changedTouches[0].clientX + XOffset) + "px" ;
     }
   }
-  document.onmouseup = function(ev){
-    console.log(ev) ;
+  document.ontouchend = function(ev){
+    if(!touchinitiated)
+      return ;
+
     document.getElementById("pinOption").style.transition = ".7s" ;
 
-    console.log(document.getElementById("pinOption").offsetWidth) ;
-
-    if(window.innerWidth - ev.clientX < XOffset + 50)
-      document.getElementById("pinOption").classList.remove("expandOption");
-    else
+    if(XOffset2 - ev.changedTouches[0].clientX > 10)
       document.getElementById("pinOption").classList.add("expandOption");
+    else if(XOffset2 - ev.changedTouches[0].clientX < -25)
+      document.getElementById("pinOption").classList.remove("expandOption");
 
     document.getElementById("pinOption").style.width = "" ;
-    document.onmousemove = null ;
+    touchinitiated = false;
   }
 });
