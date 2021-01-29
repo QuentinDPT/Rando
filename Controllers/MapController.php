@@ -7,6 +7,12 @@ if($pos__ !== false)
   $last = substr($last, 0, $pos__) ;
 $name = './src/maps/'.$UrlHashed[3].'-'.$UrlHashed[4].'-'.$last.'.png';
 
+$arg = substr($UrlHashed[5], $pos__+1);
+
+if($arg == "reload" && file_exists($name)){
+  unlink( $name ) ;
+}
+
 if(!file_exists($name)){
   $url = 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/'.$UrlHashed[3].'/'.$UrlHashed[4].'/'.$last.'?access_token='.$token;
   $data = array('name' => $name);
