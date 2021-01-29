@@ -11,4 +11,4 @@
   var GUser = {id:"",name:"",avatar:"",mail:""} ;
 </script>
 <script src="/src/js/glog.js" charset="utf-8"></script>
-<script src="/src/js/phone.zoomOnCLick.js" charset="utf-8"></script>
+<script src="/src/js/phone.js" charset="utf-8"></script>
