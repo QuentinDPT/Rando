@@ -15,43 +15,6 @@ function initMap() {
   // Créer l'objet "macarte" et l'insèrer dans l'élément HTML qui a l'ID "map"
   macarte = L.map('map').setView([46.976752, 2.650834], 6);
 
-  var basemaps = {
-    "Satellite Saturé": L.tileLayer.wms('https://rando.depotter.fr/api/map/{z}/{x}/{y}', {
-      layers: 'SateliteClone-WMS'
-    }),
-
-    'OSM': L.tileLayer("https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png",{
-      layers: 'OSM-WMS'
-    }),
-
-    'OSM relief': L.tileLayer("https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png",{
-      layers: 'OSM-Relief'
-    }),
-
-    Topography: L.tileLayer.wms('http://ows.mundialis.de/services/service?', {
-      layers: 'TOPO-WMS'
-    }),
-
-    Places: L.tileLayer.wms('http://ows.mundialis.de/services/service?', {
-      layers: 'OSM-Overlay-WMS'
-    }),
-
-    'Satelite & places': L.tileLayer.wms('http://ows.mundialis.de/services/service?', {
-      layers: 'SateliteClone-WMS,TOPO-WMS'
-    }),
-
-    'Topography & places': L.tileLayer.wms('http://ows.mundialis.de/services/service?', {
-      layers: 'TOPO-WMS,OSM-Overlay-WMS'
-    })
-  };
-
-  //L.control.layers(basemaps).addTo(macarte);
-  /*
-  basemaps.Topography.addTo(map);
-  var tms_example = L.tileLayer.wms('http://base_url/tms/1.0.0/example_layer@png/{z}/{x}/{y}.png', {
-    tms: true
-  }).addTo(map);
-  */
   // Leaflet ne récupère pas les cartes (tiles) sur un serveur par défaut. Nous devons lui préciser où nous souhaitons les récupérer. Ici, openstreetmap.fr
   satNormalLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
     minZoom: 3,
@@ -68,41 +31,11 @@ function initMap() {
 
   centerize();
 
-  //*
   // Balises
   $.ajax({
     url:"https://data.ffvl.fr/json/balises.json",
     success: function(result){
-
-      var myIcon = L.icon({
-        iconUrl: "/src/img/balise.png",
-        iconSize: [30, 30],
-        iconAnchor: [15, 30],
-        popupAnchor: [0, -30],
-      });
-
       balises = result;
-      for (balise in balises) {
-        /*
-        var marker = L.marker(
-            [balises[balise].latitude, balises[balise].longitude],
-            {icon:myIcon}
-          )
-          .addTo(macarte)
-          .bindPopup('Balise');;
-        //*/
-        /*
-        $.ajax({
-          url:"https://data.ffvl.fr/php/historique_relevesmeteo.php?idbalise=83&heures=3" + balises[balise].idBalise + "&heures=3",
-          success: function(result){
-            let r = JSON.parse(result) ;
-            var marker = L.marker([balises[balise].latitude, balises[balise].longitude])
-              .addTo(macarte)
-              .bindPopup('A pretty CSS3 popup.<br> Easily customizable.');
-          }
-        }) ;
-        //*/
-      }
     }
   }) ;
 
@@ -121,15 +54,13 @@ function initMap() {
       sites = result;
     }
   }) ;
-  //*
-  // Nous parcourons la liste des villes
-  //*/
 }
 
 
 function centerize(){
   if(userLocation.lat != 0 && userLocation.lon != 0)
     macarte.setView([userLocation.lat, userLocation.lon], 11);
+
   getLocation(function(position){
     document.getElementById("recenterizeBtn").style.display = "" ;
     if(userLocation.lat == 0 && userLocation.lon == 0)
@@ -377,25 +308,3 @@ function searchEngines(){
   searchText.onkeydown = function(e){ if(e.key == 13){ search(); } } ;
 }
 searchEngines() ;
-
-/*
-var option = document.getElementById("pinOption");
-var optionInit = function(){
-  option.onclick = function(e){
-    console.log(e) ;
-    if(option.classList.contains("expandOption"))
-      option.retract() ;
-    else
-      option.expand() ;
-  }
-
-  option.expand = function(){
-    this.classList.add("expandOption");
-  }
-
-  option.retract = function(){
-    this.classList.remove("expandOption");
-  }
-}
-optionInit() ;
-*/
