@@ -186,15 +186,11 @@
         macarte = L.map('map').setView([46.976752, 2.650834], 6);
 
         var basemaps = {
-          Satellite: L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoia3J5cHRvcyIsImEiOiJja2tmcW94YmswZmtlMm9teXh0b2oyd200In0.WyYX3XtfCzn7-IoNJHQnHw', {
+          Satellite: L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",{
             layers: 'Satelite-WMS'
           }),
 
-          Sat: L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",{
-            layers: 'Sat-WMS'
-          }),
-
-          "Satellite Clone": L.tileLayer.wms('https://rando.depotter.fr/api/map/{z}/{x}/{y}', {
+          "Satellite Saturé": L.tileLayer.wms('https://rando.depotter.fr/api/map/{z}/{x}/{y}', {
             layers: 'SateliteClone-WMS'
           }),
 
@@ -231,9 +227,16 @@
         }).addTo(map);
         */
         // Leaflet ne récupère pas les cartes (tiles) sur un serveur par défaut. Nous devons lui préciser où nous souhaitons les récupérer. Ici, openstreetmap.fr
-        L.tileLayer('https://rando.depotter.fr/api/map/{z}/{x}/{y}', {
-          minZoom: 1,
-          maxZoom: 17
+        satNormalLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+          minZoom: 3,
+          maxZoom: 16
+        }).addTo(macarte);
+
+        var Stamen_TonerHybrid = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-hybrid/{z}/{x}/{y}{r}.{ext}', {
+        	subdomains: 'abcd',
+        	minZoom: 3,
+        	maxZoom: 16,
+        	ext: 'png'
         }).addTo(macarte);
         macarte.removeControl(macarte.zoomControl);
 
