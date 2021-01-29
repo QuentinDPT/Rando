@@ -13,7 +13,7 @@ if($arg == "reload" && file_exists($name)){
   unlink( $name ) ;
 }
 
-if($UrlHashed[3] > 10){
+if($UrlHashed[3] > 11){
   header("Location: https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/".$UrlHashed[3]."/".$last."/".$UrlHashed[4]);
   die();
 }
