@@ -1,0 +1,51 @@
+
+#search-bar>*{
+  width:800px;
+}
+
+
+#pinOption{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  min-width: 20px;
+  max-width: 70vw;
+  z-index: 1001;
+  transition: .3s;
+}
+
+.pinOption{
+  width: 15px;
+  background-color: #FFFFFF01;
+}
+
+#pinOption::after{
+  content: "";
+  position: absolute;
+  display: inline-block;
+
+  background-color: #66666696;
+  border-radius: 2px;
+
+  width: 5px;
+  height: 30px;
+
+  right: 5px;
+  top: 50%;
+  bottom: 50%;
+  margin-top: -50%;
+  margin-bottom: -50%;
+}
+
+#pinOption:hover, .expandOption{
+  width:600px;
+  background-color: #FFFFFFEE;
+}
+
+#pinOption>*{
+  transform: translateX(-600px);
+  transition: .2s;
+}
+#pinOption:hover>*{
+  transform: translateX(0);
+}

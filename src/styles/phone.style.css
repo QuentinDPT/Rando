@@ -1,0 +1,43 @@
+
+#pinOption{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right:0;
+  min-width: 20px;
+  max-width: 70vw;
+  z-index: 1001;
+}
+
+.pinOption{
+  width: 15px;
+  background-color: #FFFFFF11;
+}
+
+#pinOption::after{
+  content: "";
+  position: absolute;
+  display: inline-block;
+
+  background-color: #66666696;
+  border-radius: 2px;
+
+  width: 5px;
+  height: 30px;
+
+  left: 5px;
+  top: 50%;
+  bottom: 50%;
+  margin-top: -50%;
+  margin-bottom: -50%;
+}
+
+.expandOption{
+  width:600px;
+  background-color: #FFFFFFEE;
+}
+
+#pinOption>*{
+}
+#pinOption:hover>*{
+}
