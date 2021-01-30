@@ -11,9 +11,9 @@
   <div>
     <h2>Options</h2>
     <ul>
-      <li><label for="sitesCheckbox">Sites</label><input type="checkbox" id="sitesCheckbox" name="sitesCheckbox"></li>
-      <li><label for="structuresCheckbox">Structures</label><input type="checkbox" id="structuresCheckbox" name="structuresCheckbox"></li>
-      <li><label for="balisesCheckbox">Balises</label><input type="checkbox" id="balisesCheckbox" name="balisesCheckbox"></li>
+      <li><input type="checkbox" id="sitesCheckbox" name="sitesCheckbox"><label for="sitesCheckbox">Sites</label></li>
+      <li><input type="checkbox" id="structuresCheckbox" name="structuresCheckbox"><label for="structuresCheckbox">Structures</label></li>
+      <li><input type="checkbox" id="balisesCheckbox" name="balisesCheckbox"><label for="balisesCheckbox">Balises</label></li>
     </ul>
   </div>
 </div>

@@ -10,11 +10,12 @@ window.addEventListener("load", function(e) {
     XOffset = -(window.innerWidth - e.changedTouches[0].clientX - document.getElementById("pinOption").offsetWidth);
     XOffset2 = e.changedTouches[0].clientX ;
     document.getElementById("pinOption").style.transition = "" ;
-    document.getElementById("pinOption").classList.remove("optionShow");
     //document.getElementById("pinOption").classList.remove("optionShow");
     document.ontouchmove = function(ev){
       if(!touchinitiated)
         return ;
+        
+      document.getElementById("pinOption").classList.remove("optionShow");
       document.getElementById("pinOption").classList.add("pinOptionMove");
       document.getElementById("pinOption").style.width = (window.innerWidth - ev.changedTouches[0].clientX + XOffset) + "px" ;
     }
@@ -24,15 +25,23 @@ window.addEventListener("load", function(e) {
       return ;
 
     document.getElementById("pinOption").style.transition = ".7s" ;
+    document.getElementById("pinOption").ontransitionend = function(e){
+      if(e.propertyName == "width"){
+        document.getElementById("pinOption").classList.remove("pinOptionMove");
+        if(document.getElementById("pinOption").offsetWidth == 20){
+        }else{
+          document.getElementById("pinOption").classList.add("optionShow");
+        }
+        document.getElementById("pinOption").style.transition = "" ;
+      }
+    }
 
-    document.getElementById("pinOption").classList.remove("pinOptionMove");
 
     if(XOffset2 - ev.changedTouches[0].clientX > 10){
       document.getElementById("pinOption").classList.add("expandOption");
-      document.getElementById("pinOption").classList.add("optionShow");
     }else if(XOffset2 - ev.changedTouches[0].clientX < -25){
       document.getElementById("pinOption").classList.remove("expandOption");
-    }else{
+    }else if(document.getElementById("pinOption").classList.contains("expandOption")){
       document.getElementById("pinOption").classList.add("optionShow");
     }
 

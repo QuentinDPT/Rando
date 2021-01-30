@@ -55,7 +55,7 @@
   width:100vw;
   backdrop-filter: blur(10px);
 }
-.expandOption::after{
+.optionShow::after{
   display:none;
 }
 
