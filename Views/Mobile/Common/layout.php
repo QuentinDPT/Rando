@@ -9,6 +9,8 @@
     <meta name="mobile-web-app-capable" content="yes">
   	<meta name="apple-touch-fullscreen" content="yes">
 
+    <?php require("./Views/common.php"); ?>
+
     <?php if($this->AdditionnalScripts != null) require($this->AdditionnalScripts); ?>
   </head>
   <body>
