@@ -14,7 +14,7 @@ window.addEventListener("load", function(e) {
     document.ontouchmove = function(ev){
       if(!touchinitiated)
         return ;
-        
+
       document.getElementById("pinOption").classList.remove("optionShow");
       document.getElementById("pinOption").classList.add("pinOptionMove");
       document.getElementById("pinOption").style.width = (window.innerWidth - ev.changedTouches[0].clientX + XOffset) + "px" ;
@@ -24,7 +24,7 @@ window.addEventListener("load", function(e) {
     if(!touchinitiated)
       return ;
 
-    document.getElementById("pinOption").style.transition = ".7s" ;
+    document.getElementById("pinOption").style.transition = ".3s ease-out" ;
     document.getElementById("pinOption").ontransitionend = function(e){
       if(e.propertyName == "width"){
         document.getElementById("pinOption").classList.remove("pinOptionMove");

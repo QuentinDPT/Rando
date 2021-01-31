@@ -54,13 +54,14 @@
 .expandOption{
   width:100vw;
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 .optionShow::after{
   display:none;
 }
 
 .expandOption>div{
-  transition:.3s;
+  transition:.3s ease-out;
   opacity:0;
 }
 
