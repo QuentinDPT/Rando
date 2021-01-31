@@ -86,7 +86,8 @@
 .optionsContainer{
   padding: 0 ;
   max-height:100%;
-  overflow:auto;
+  overflow-y:auto;
+  overflow-x:hidden;
   margin:0;
   margin-left: 2rem;
 }
@@ -94,4 +95,39 @@
 .option{
   list-style: none;
   min-width: 200px;
+}
+
+.option>*{
+  font-size: 18px;
+}
+
+.option label{
+  padding-left: .3rem;
+}
+
+.option input[type="checkbox"]{
+  background-color: transparent;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+
+  width: 13px;
+  height: 13px;
+
+  transition:.3s;
+
+  background-color: #FFFFFF ;
+  border-color: #FFFFFF;
+  border-style: solid;
+  border-width: 3px;
+}
+
+.option input[type="checkbox"]:checked {
+  border-color: #ff9500 ;
+}
+
+.option.dataloaded input[type="checkbox"]:checked{
+  border-color: #31b926 ;
+  background-color: #31b926 ;
 }

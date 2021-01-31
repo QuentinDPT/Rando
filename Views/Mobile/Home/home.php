@@ -8,7 +8,7 @@
 </div>
 <div id="pinOption" class="pinOption">
   <div>
-    <div class="" style="max-height: 100%;display:flex;flex-direction:column;overflow:auto;">
+    <div class="" style="max-height: 100%;display:flex;flex-direction:column;overflow-y:auto;overflow-x:hidden;">
       <h2 style="margin-top:0;margin-left:1rem;">Options</h2>
       <ul id="optionsContainer" class="optionsContainer">
         <?php require("pins.php") ?>
