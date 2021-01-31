@@ -15,7 +15,10 @@ window.addEventListener("load", function(e) {
       if(!touchinitiated)
         return ;
 
-      document.getElementById("pinOption").classList.remove("optionShow");
+      if(XOffset2 - ev.changedTouches[0].clientX < -25){
+        document.getElementById("pinOption").classList.remove("optionShow");
+      }
+      //document.getElementById("pinOption").classList.remove("optionShow");
       document.getElementById("pinOption").classList.add("pinOptionMove");
       document.getElementById("pinOption").style.width = (window.innerWidth - ev.changedTouches[0].clientX + XOffset) + "px" ;
     }

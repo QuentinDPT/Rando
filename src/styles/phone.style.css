@@ -11,18 +11,10 @@
 
 .pinOption>div{
   opacity:0;
-  margin-top: 10vh;
-  margin-left: 10px;
-}
-
-.pinOption>div>*{
-  margin-top: 5px;
-  margin-bottom: 5px;
 }
 
 .pinOption>div>ul{
   list-style: none;
-  padding-left: 10px;
 }
 
 .pinOption{
@@ -67,10 +59,26 @@
 }
 
 .optionShow{
+  position:fixed;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  padding-top: 10vh;
   background-color: #FFFFFFAA;
   opacity:1;
 }
 
 .optionShow>div{
   opacity:1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height:100%;
+}
+
+
+.additionnalMenu{
+  margin: .5rem;
+  display:flex;
 }

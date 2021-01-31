@@ -296,7 +296,6 @@ function searchEngines(){
     $.ajax({
       url:"https://api-adresse.data.gouv.fr/search/?q="+searchText.value.replace(" ","+"),
       success: function(result){
-        console.log(result);
         macarte.setView([result.features[0].geometry.coordinates[1], result.features[0].geometry.coordinates[0]], 12);
       }
     }) ;
