@@ -52,4 +52,8 @@ window.addEventListener("load", function(e) {
     document.getElementById("pinOption").style.width = "" ;
     touchinitiated = false;
   }
+
+  document.getElementById("optionsContainer").ontouchstart = function(e){
+    e.stopPropagation();
+  }
 });

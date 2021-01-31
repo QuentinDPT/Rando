@@ -1,4 +1,3 @@
-
 <div id="map">
 </div>
 <div id="search-bar">
@@ -9,12 +8,10 @@
 </div>
 <div id="pinOption" class="pinOption">
   <div>
-    <div class="">
-      <h2>Options</h2>
-      <ul>
-        <li><input type="checkbox" id="sitesCheckbox" name="sitesCheckbox"><label for="sitesCheckbox">Sites</label></li>
-        <li><input type="checkbox" id="structuresCheckbox" name="structuresCheckbox"><label for="structuresCheckbox">Structures</label></li>
-        <li><input type="checkbox" id="balisesCheckbox" name="balisesCheckbox"><label for="balisesCheckbox">Balises</label></li>
+    <div class="" style="max-height: 100%;display:flex;flex-direction:column;overflow:auto;">
+      <h2 style="margin-top:0;margin-left:1rem;">Options</h2>
+      <ul id="optionsContainer" class="optionsContainer">
+        <?php require("pins.php") ?>
       </ul>
     </div>
     <div class="additionnalMenu">
