@@ -93,4 +93,5 @@
 
 .option{
   list-style: none;
+  min-width: 200px;
 }
