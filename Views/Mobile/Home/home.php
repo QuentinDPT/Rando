@@ -27,8 +27,10 @@
     </div>
   </div>
 </div>
-<div class="button" style="position:fixed;bottom:0;left:0;z-index:1000; margin-left:.5rem;margin-bottom:.5rem;">
-  <div id="recenterizeBtn" style="display:none;"><input type="button" name="" style="width:36px;height:36px;border:none;margin-bottom:.2rem; background-color:white;margin:0;" value="🛰️" onclick="centerize();"></div>
+<div style="position:fixed;bottom:0;left:0;z-index:1000; margin-left:.5rem;margin-bottom:.5rem;" onclick="centerize();">
+  <div class="button" id="recenterizeBtn" style="display:none;width:36px;height:36px;border:none;margin-bottom:.2rem; margin:0; display:none;justify-content:center;">
+    <span style="text-align: center;">🛰️</span>
+  </div>
 </div>
 
 <script src="/src/js/map.js" charset="utf-8"></script>

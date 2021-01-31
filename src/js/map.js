@@ -62,7 +62,7 @@ function centerize(){
     macarte.setView([userLocation.lat, userLocation.lon]);
 
   getLocation(function(position){
-    document.getElementById("recenterizeBtn").style.display = "" ;
+    document.getElementById("recenterizeBtn").style.display = "flex" ;
     if(userLocation.lat == 0 && userLocation.lon == 0)
       macarte.setView([position.coords.latitude, position.coords.longitude], 14);
     userLocation.lat = position.coords.latitude;
