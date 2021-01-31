@@ -16,7 +16,7 @@ window.addEventListener("load", function(e) {
         return ;
 
       if(XOffset2 - ev.changedTouches[0].clientX < -25){
-        document.getElementById("pinOption").classList.remove("optionShow");
+        //document.getElementById("pinOption").classList.remove("optionShow");
       }
       //document.getElementById("pinOption").classList.remove("optionShow");
       document.getElementById("pinOption").classList.add("pinOptionMove");
@@ -44,6 +44,7 @@ window.addEventListener("load", function(e) {
       document.getElementById("pinOption").classList.add("expandOption");
     }else if(XOffset2 - ev.changedTouches[0].clientX < -25){
       document.getElementById("pinOption").classList.remove("expandOption");
+      document.getElementById("pinOption").classList.remove("optionShow");
     }else if(document.getElementById("pinOption").classList.contains("expandOption")){
       document.getElementById("pinOption").classList.add("optionShow");
     }
