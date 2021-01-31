@@ -18,7 +18,7 @@
       </ul>
     </div>
     <div class="additionnalMenu">
-      <div id="report" onclick="alert('c'est pour plus tard')" class="button" style="width:100%; margin-right:.5rem;">
+      <div id="report" onclick="alert('c\'est pour plus tard');" class="button" style="width:100%; margin-right:.5rem;">
         <span style="padding-left:.4rem">🗺️</span>
         <span class='abcRioButtonContents'>Report</span>
       </div>
