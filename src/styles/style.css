@@ -14,6 +14,7 @@
 #signout{
   height:36px;
   min-width:120px;
+  max-width:120px;
   display:inline-flex;
   justify-content: space-between;
   align-items: center;
