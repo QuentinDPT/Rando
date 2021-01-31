@@ -59,12 +59,12 @@ function initMap() {
 
 function centerize(){
   if(userLocation.lat != 0 && userLocation.lon != 0)
-    macarte.setView([userLocation.lat, userLocation.lon], 11);
+    macarte.setView([userLocation.lat, userLocation.lon]);
 
   getLocation(function(position){
     document.getElementById("recenterizeBtn").style.display = "" ;
     if(userLocation.lat == 0 && userLocation.lon == 0)
-      macarte.setView([position.coords.latitude, position.coords.longitude], 11);
+      macarte.setView([position.coords.latitude, position.coords.longitude], 14);
     userLocation.lat = position.coords.latitude;
     userLocation.lon = position.coords.longitude;
     if(userMarker == null || userMarker == undefined){
