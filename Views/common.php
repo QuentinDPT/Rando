@@ -19,14 +19,14 @@ else
 <meta property="og:url" content="http://rando.depotter.fr/">
 <meta property="og:title" content="Rando">
 <meta property="og:description" content="Invitez vos amis à rejoindre votre route, partagez vos découvertes, et vos plus belles randonnées">
-<meta property="og:image" content="/src/img/sentier.<?php echo $_season ?>.png">
+<meta property="og:image" content="/src/img/social.<?php echo $_season ?>.png">
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image">
 <meta property="twitter:url" content="http://rando.depotter.fr/">
 <meta property="twitter:title" content="Rando">
 <meta property="twitter:description" content="Invitez vos amis à rejoindre votre route, partagez vos découvertes, et vos plus belles randonnées">
-<meta property="twitter:image" content="/src/img/sentier.<?php echo $_season ?>.png">
+<meta property="twitter:image" content="/src/img/social.<?php echo $_season ?>.png">
 
 <?php
   unset($_date);
