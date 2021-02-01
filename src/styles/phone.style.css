@@ -131,3 +131,14 @@
   border-color: #31b926 ;
   background-color: #31b926 ;
 }
+
+.optionSubmenuTitle{
+  font-size: 19px;
+  position:sticky;
+  top:0;
+  width: auto;
+  display: block;
+  text-align: end;
+  padding-right: .5rem;
+  border-top: 1px solid;
+}
