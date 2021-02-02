@@ -1,44 +1,123 @@
-<script type="text/javascript">
-  function optionChange(e){
-    console.log(e);
-    if(e.checked){
-      setTimeout(() => { e.parentElement.classList.add("dataloaded"); }, 1000);
-    }else{
+<?php
 
+  class API{
+    public $URL;
+    public $lat;
+    public $lon;
+    public $Name;
+    public $DisplayName;
+    public $dataName;
+    public $Color ;
+
+    public function __construct($URL, $lat, $lon, $dataName, $nom, $displayName){
+      $this->URL = $URL;
+      $this->lat = $lat;
+      $this->lon = $lon;
+      $this->Name = $nom;
+      $this->DisplayName = $displayName;
+      $this->dataName = $dataName;
+      $this->Color = "#FF0000";
+    }
+  };
+
+  class APIContainer{
+    public $Name;
+    public $APIs;
+
+    public function __construct($Name, $APIs){
+      $this->Name = $Name;
+      $this->APIs = $APIs;
     }
   }
+
+  $APIs = [];
+
+  $Life = [];
+  $Life[] = new API("https://data.ffvl.fr/json/structures.json","STRU_LATITUDE","STRU_LONGITUDE","STRU_NOM","Refuge","Refuge");
+  $Life[] = new API("https://data.ffvl.fr/json/balises.json","latitude","longitude","nom","Bivouac","Lieu de bivouac");
+  $Life[] = new API("https://data.ffvl.fr/json/sites.json","lat","lon","nom","Camp","Camping");
+
+  $APIs[] = new APIContainer("Lieu de vie",$Life);
+
+  $Water = [];
+  $Water[] = new API("https://data.ffvl.fr/json/structures.json","STRU_LATITUDE","STRU_LONGITUDE","STRU_NOM","WaterDrinkable","Robinet d'eau potable");
+  $Water[] = new API("https://data.ffvl.fr/json/balises.json","latitude","longitude","nom","WaterSpring", "Source d'eau");
+  $Water[] = new API("https://data.ffvl.fr/json/sites.json","lat","lon","nom","WaterBathing","Lieu de baignade");
+
+  $APIs[] = new APIContainer("Eau",$Water);
+
+  $Weather = [] ;
+  $Weather[] = new API("https://data.ffvl.fr/json/sites.json","lat","lon","nom","Temps","Températures");
+  $Weather[] = new API("https://data.ffvl.fr/json/balises.json","latitude","longitude","nom","Rain","Précipitations");
+  $Weather[] = new API("https://data.ffvl.fr/json/structures.json","STRU_LATITUDE","STRU_LONGITUDE","STRU_NOM","Wind","Vent");
+
+  $APIs[] = new APIContainer("Météo",$Weather);
+
+  $FFVL = [] ;
+  $FFVL[] = new API("https://data.ffvl.fr/json/sites.json","lat","lon","nom","Sites","Sites");
+  $FFVL[] = new API("https://data.ffvl.fr/json/balises.json","latitude","longitude","nom","Balises","Balises");
+  $FFVL[] = new API("https://data.ffvl.fr/json/structures.json","STRU_LATITUDE","STRU_LONGITUDE","STRU_NOM","Structures","Structures");
+
+  $APIs[] = new APIContainer("FFVL",$FFVL);
+ ?>
+<script type="text/javascript">
+
+  <?php
+  foreach ($APIs as $apiContainer) {
+    foreach ($apiContainer->APIs as $api) {
+  ?>
+  var <?php echo $api->Name ?> = null;
+
+  function option<?php echo $api->Name ?>Change(e){
+    if(e.checked){
+      if(<?php echo $api->Name ?> == null){
+        $.ajax({
+          url:"<?php echo $api->URL ?>",
+          success: function(result){
+            e.parentElement.classList.add("dataloaded");
+            <?php echo $api->Name ?> = result;
+            option<?php echo $api->Name ?>Show();
+          }
+        }) ;
+      }else{
+        option<?php echo $api->Name ?>Show();
+      }
+    }else{
+      option<?php echo $api->Name ?>Hide();
+    }
+  }
+
+  function option<?php echo $api->Name ?>Show(){
+    console.log("show <?php echo $api->Name ?>") ;
+  }
+  function option<?php echo $api->Name ?>Hide(){
+    console.log("hide <?php echo $api->Name ?>") ;
+  }
+  <?php
+    }
+  }
+  ?>
+
 </script>
 
+<?php
+foreach ($APIs as $apiContainer) {
+?>
 <li>
-  <span class="optionSubmenuTitle">Lieu de vie</span>
-  <ul style="padding:0">
-    <li class="option"><input type="checkbox" id="refuge" name="refuge" onchange="optionChange(this);"><label for="refuge">Refuge</label></li>
-    <li class="option"><input type="checkbox" id="bivouac" name="bivouac" onchange="optionChange(this);"><label for="bivouac">Lieu de bivouac</label></li>
-    <li class="option"><input type="checkbox" id="camping" name="camping" onchange="optionChange(this);"><label for="camping">Camping</label></li>
+  <span class="optionSubmenuTitle"><?php echo $apiContainer->Name ?></span>
+  <ul style="padding:0;margin-top: -.5rem;margin-bottom: .5rem;">
+    <?php
+    foreach ($apiContainer->APIs as $api) {
+    ?>
+    <li class="option">
+      <input type="checkbox" id="<?php echo $api->Name ?>" name="<?php echo $api->Name ?>" onchange="option<?php echo $api->Name ?>Change(this);">
+      <label for="<?php echo $api->Name ?>"><?php echo $api->DisplayName ?></label>
+    </li>
+    <?php
+    }
+    ?>
   </ul>
 </li>
-<li>
-  <span class="optionSubmenuTitle">Eau</span>
-  <ul style="padding:0">
-    <li class="option"><input type="checkbox" id="water-drinkable" name="water-drinkable" onchange="optionChange(this);"><label for="water-drinkable">Robinet d'eau potable</label></li>
-    <li class="option"><input type="checkbox" id="water-spring" name="water-spring" onchange="optionChange(this);"><label for="water-spring">Source d'eau</label></li>
-    <li class="option"><input type="checkbox" id="water-bathing" name="water-bathing" onchange="optionChange(this);"><label for="water-bathing">Lieu de baignade</label></li>
-  </ul>
-</li>
-<li>
-  <span class="optionSubmenuTitle">FFVL</span>
-  <ul style="padding:0">
-    <li class="option"><input type="checkbox" id="sitesCheckbox" name="sitesCheckbox" onchange="optionChange(this);"><label for="sitesCheckbox">Sites</label></li>
-    <li class="option"><input type="checkbox" id="structuresCheckbox" name="structuresCheckbox" onchange="optionChange(this);"><label for="structuresCheckbox">Structures</label></li>
-    <li class="option"><input type="checkbox" id="balisesCheckbox" name="balisesCheckbox" onchange="optionChange(this);"><label for="balisesCheckbox">Balises</label></li>
-  </ul>
-</li>
-
-<li>
-  <span class="optionSubmenuTitle">Test zone</span>
-  <ul style="padding:0">
-    <?php for($i = 0;$i<72;$i++){?>
-    <li class="option"><input type="checkbox" id="test<?php echo $i ?>" name="test<?php echo $i ?>" onchange="optionChange(this);"><label for="test<?php echo $i ?>">test <?php echo $i ?></label></li>
-    <?php } ?>
-  </ul>
-</li>
+<?php
+}
+?>

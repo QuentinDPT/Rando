@@ -23,9 +23,6 @@
     }
   }) ;
 
-
-
-
   function toggleStructures(){
     if(structuresPin.length != 0)
       hideStructures();
