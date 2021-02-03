@@ -67,6 +67,7 @@
     foreach ($apiContainer->APIs as $api) {
   ?>
   var <?php echo $api->Name ?> = null;
+  var <?php echo $api->Name ?>Pins = [];
 
   function option<?php echo $api->Name ?>Change(e){
     if(e.checked){
@@ -89,9 +90,33 @@
 
   function option<?php echo $api->Name ?>Show(){
     console.log("show <?php echo $api->Name ?>") ;
+    if(<?php echo $api->Name ?>Pins.length != 0)
+      return;
+
+    var sites = <?php echo $api->Name ?> ;
+
+    var icon = L.icon({
+      iconUrl: "/src/img/site.png",
+      iconSize: [30, 30],
+      iconAnchor: [15, 30],
+      popupAnchor: [0, -30],
+    });
+
+    for (site in sites) {
+      var marker = L.marker(
+          [sites[site].<?php echo $api->lat ?>, sites[site].<?php echo $api->lon ?>]
+        )
+        .addTo(macarte)
+        .bindPopup("<?php echo $api->Name ?><br>" + sites[site].<?php echo $api->dataName ?>);
+      <?php echo $api->Name ?>Pins.push(marker);
+    }
   }
   function option<?php echo $api->Name ?>Hide(){
     console.log("hide <?php echo $api->Name ?>") ;
+    for (var pin of <?php echo $api->Name ?>Pins) {
+      pin.remove();
+    }
+    <?php echo $api->Name ?>Pins = [] ;
   }
   <?php
     }
