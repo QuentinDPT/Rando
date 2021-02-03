@@ -95,19 +95,16 @@
 
     var sites = <?php echo $api->Name ?> ;
 
-    var icon = L.icon({
-      iconUrl: "/src/img/site.png",
-      iconSize: [30, 30],
-      iconAnchor: [15, 30],
-      popupAnchor: [0, -30],
-    });
-
     for (site in sites) {
-      var marker = L.marker(
-          [sites[site].<?php echo $api->lat ?>, sites[site].<?php echo $api->lon ?>]
-        )
+      var marker = L.circleMarker(
+        [sites[site].<?php echo $api->lat ?>, sites[site].<?php echo $api->lon ?>],
+        {
+          renderer: L.canvas(),
+          color: "<?php echo $api->Color ?>"
+        })
         .addTo(macarte)
         .bindPopup("<?php echo $api->Name ?><br>" + sites[site].<?php echo $api->dataName ?>);
+
       <?php echo $api->Name ?>Pins.push(marker);
     }
   }
