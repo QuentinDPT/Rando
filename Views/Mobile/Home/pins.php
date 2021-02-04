@@ -29,8 +29,13 @@
       $this->APIs = $APIs;
     }
   }
-
   $APIs = [];
+
+  $Rando = [];
+  $Rando[] = new API("https://data.ffvl.fr/json/structures.json","STRU_LATITUDE","STRU_LONGITUDE","STRU_NOM","ViaFerrata","Via ferrata");
+  $Rando[] = new API("https://data.ffvl.fr/json/structures.json","STRU_LATITUDE","STRU_LONGITUDE","STRU_NOM","ViaFerrata","Chemin de compostelle");
+
+  $APIs[] = new APIContainer("Randonné",$Rando);
 
   $Life = [];
   $Life[] = new API("https://data.ffvl.fr/json/structures.json","STRU_LATITUDE","STRU_LONGITUDE","STRU_NOM","Refuge","Refuge");
@@ -38,6 +43,11 @@
   $Life[] = new API("https://data.ffvl.fr/json/sites.json","lat","lon","nom","Camp","Camping");
 
   $APIs[] = new APIContainer("Lieu de vie",$Life);
+
+  $Monuments = [];
+  $Monuments[] = new API("https://data.ffvl.fr/json/structures.json","STRU_LATITUDE","STRU_LONGITUDE","STRU_NOM","Ruine","Ruine");
+
+  $APIs[] = new APIContainer("Monuments",$Monuments);
 
   $Water = [];
   $Water[] = new API("https://data.ffvl.fr/json/structures.json","STRU_LATITUDE","STRU_LONGITUDE","STRU_NOM","WaterDrinkable","Robinet d'eau potable");
@@ -59,6 +69,7 @@
   $FFVL[] = new API("https://data.ffvl.fr/json/structures.json","STRU_LATITUDE","STRU_LONGITUDE","STRU_NOM","Structures","Structures","#FFA500");
 
   $APIs[] = new APIContainer("FFVL",$FFVL);
+  $APIs[] = new APIContainer("Autre",[]);
  ?>
 <script type="text/javascript">
 
