@@ -9,14 +9,14 @@
     public $dataName;
     public $Color ;
 
-    public function __construct($URL, $lat, $lon, $dataName, $nom, $displayName){
+    public function __construct($URL, $lat, $lon, $dataName, $nom, $displayName, $Color = "#FF0000"){
       $this->URL = $URL;
       $this->lat = $lat;
       $this->lon = $lon;
       $this->Name = $nom;
       $this->DisplayName = $displayName;
       $this->dataName = $dataName;
-      $this->Color = "#FF0000";
+      $this->Color = $Color;
     }
   };
 
@@ -54,9 +54,9 @@
   $APIs[] = new APIContainer("Météo",$Weather);
 
   $FFVL = [] ;
-  $FFVL[] = new API("https://data.ffvl.fr/json/sites.json","lat","lon","nom","Sites","Sites");
-  $FFVL[] = new API("https://data.ffvl.fr/json/balises.json","latitude","longitude","nom","Balises","Balises");
-  $FFVL[] = new API("https://data.ffvl.fr/json/structures.json","STRU_LATITUDE","STRU_LONGITUDE","STRU_NOM","Structures","Structures");
+  $FFVL[] = new API("https://data.ffvl.fr/json/sites.json","lat","lon","nom","Sites","Sites", "#0000FF");
+  $FFVL[] = new API("https://data.ffvl.fr/json/balises.json","latitude","longitude","nom","Balises","Balises", "#00FF00");
+  $FFVL[] = new API("https://data.ffvl.fr/json/structures.json","STRU_LATITUDE","STRU_LONGITUDE","STRU_NOM","Structures","Structures","#FFA500");
 
   $APIs[] = new APIContainer("FFVL",$FFVL);
  ?>
@@ -99,7 +99,6 @@
       var marker = L.circleMarker(
         [sites[site].<?php echo $api->lat ?>, sites[site].<?php echo $api->lon ?>],
         {
-          renderer: L.canvas(),
           color: "<?php echo $api->Color ?>"
         })
         .addTo(macarte)

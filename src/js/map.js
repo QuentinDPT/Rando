@@ -7,7 +7,7 @@ var userLocation = {lat:0,lon:0};
 // Fonction d'initialisation de la carte
 function initMap() {
   // Créer l'objet "macarte" et l'insèrer dans l'élément HTML qui a l'ID "map"
-  macarte = L.map('map').setView([46.976752, 2.650834], 6);
+  macarte = L.map('map',{preferCanvas:true}).setView([46.976752, 2.650834], 6);
 
   // Leaflet ne récupère pas les cartes (tiles) sur un serveur par défaut. Nous devons lui préciser où nous souhaitons les récupérer. Ici, openstreetmap.fr
   satNormalLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
