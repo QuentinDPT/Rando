@@ -143,3 +143,21 @@
   padding-right: .5rem;
   border-top: 1px solid;
 }
+
+.addPinSection{
+  position: fixed;
+  height:100vh;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #FFF8;
+  z-index: 1005;
+}
+
+.addPinSection>div{
+  background-color: white;
+  height:100%;
+  border-radius: 1rem;
+  margin: .5rem 1rem;
+  padding: .5rem 1rem;
+}

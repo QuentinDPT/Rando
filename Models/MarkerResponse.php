@@ -1,22 +1,22 @@
 <?php
 
 class API{
-  public $URL;
-  public $lat;
-  public $lon;
   public $Name;
   public $DisplayName;
-  public $dataName;
   public $Color ;
+  public $DataNameLat;
+  public $DataNameLon;
+  public $DataNameTitle;
+  public $URL;
 
-  public function __construct($URL, $lat, $lon, $dataName, $nom, $displayName, $Color = "#FF0000"){
-    $this->URL = $URL;
-    $this->lat = $lat;
-    $this->lon = $lon;
-    $this->Name = $nom;
-    $this->DisplayName = $displayName;
-    $this->dataName = $dataName;
-    $this->Color = $Color;
+  public function __construct($Name,$DisplayName,$Color,$URL="",$DataNameLat="latitude",$DataNameLon="longitude",$DataNameTitle="nom"){
+    $this->Name           = $Name;
+    $this->DisplayName    = $DisplayName;
+    $this->Color          = $Color;
+    $this->URL            = $URL;
+    $this->DataNameLat    = $DataNameLat;
+    $this->DataNameLon    = $DataNameLon;
+    $this->DataNameTitle  = $DataNameTitle;
   }
 
   public function getClientFunctions(){
@@ -52,12 +52,12 @@ class API{
 
       for (site in ".$this->Name.") {
         var marker = L.circleMarker(
-          [".$this->Name."[site].".$this->lat.", ".$this->Name."[site].".$this->lon."],
+          [".$this->Name."[site].".$this->DataNameLat.", ".$this->Name."[site].".$this->DataNameLon."],
           {
             color: '".$this->Color."'
           })
           .addTo(macarte)
-          .bindPopup('".$this->Name."<br>' + ".$this->Name."[site].".$this->dataName.");
+          .bindPopup('".$this->Name."<br>' + ".$this->Name."[site].".$this->DataNameTitle.");
 
         ".$this->Name."Pins.push(marker);
       }
