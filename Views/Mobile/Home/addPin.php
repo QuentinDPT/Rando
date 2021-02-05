@@ -51,7 +51,6 @@
           url:'/api/markers/add',
           contentType: 'application/json',
           data: JSON.stringify(request),
-          dataType: 'json',
           success: function(result){
             document.getElementById('addPinSection').style = 'display:none';
           },
@@ -65,7 +64,7 @@
       }
 
       // save for later
-      //if(_uid != "")
+      if(_uid != "")
         getLocation();
     }
   </script>
