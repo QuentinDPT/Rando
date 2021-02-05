@@ -1,7 +1,7 @@
 <?php
 
 if($CurrentURL->get(0) == "api"){
-  require("./API/API.route.php") ;
+  require("./API_/API.route.php") ;
 }else if($CurrentURL->get(0) == "favicon.ico"){
   // Favicon redirection
   header("Location: ./src/favicon.ico");

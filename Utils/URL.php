@@ -66,11 +66,13 @@ class URL{
       $result = "/" ;
 
     $args = "" ;
-    foreach ($this->Arguments as $elem) {
-      $args .= "&" . $elem[0] ;
-      if(count($elem) != 1)
-        $args .= "=" . $elem[1] ;
+    if($this->Arguments != ""){
+      foreach ($this->Arguments as $elem) {
+        $args .= "&" . $elem[0] ;
+        if(count($elem) != 1)
+          $args .= "=" . $elem[1] ;
 
+      }
     }
 
     if($args != "")
