@@ -68,6 +68,9 @@ class MarkerController{
       $req = "INSERT INTO Markers (MarkerCategory, MarkerType, UID, lat, lon, Name, Description)
               VALUES ('$MarkerCategory', '$MarkerType', '$UID', $lat, $lon, '$Name', '$Description')";
       $res = $bdd->insert($req, []);
+      var_dump($res);
+      var_dump($bdd);
+
       if ($res === false) {
         echo "Error while executing request";
         die();
