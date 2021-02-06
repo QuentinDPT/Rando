@@ -1,23 +1,37 @@
+<?php
+  //require("Controllers/MarkerController.php");
+  $markersType = (new MarkerController())->getAllMarkers();
+?>
 <div id="addPinSection" class="addPinSection" style="display:none;">
 
   <div>
     <div>
-
     </div>
     <div>
-      <input type="text" id="reportPointName" name="" value="" placeholder="Nom">
+      <input type="text" id="reportPointTitle" name="" value="" placeholder="Titre">
     </div>
     <div>
-      <input type="text" id="reportPointDesc" name="" value="" placeholder="Description">
+      <textarea id="reportPointDesc" name="reportPointDesc" placeholder="Description..."></textarea>
     </div>
-    <input type="button" value="Signaler" onclick="reportPoint()">
-    <input type="button" value="Fermer" onclick="document.getElementById('addPinSection').style = 'display:none';">
+    <div>
+      <select id="reportPointCateg">
+        <?php
+        foreach ($markersType as $apiContainer) {
+          foreach ($apiContainer->APIs as $api) {
+            echo "<option value='".$api->Name."'>".$api->DisplayName."</option>" ;
+          }
+        }
+        ?>
+      </select>
+    </div>
+    <input type="button" class="btn" value="Signaler" onclick="reportPoint()">
+    <input type="button" class="btn" value="Fermer" onclick="document.getElementById('addPinSection').style = 'display:none';">
   </div>
 
   <script type="text/javascript">
     function reportPoint(){
-      var categ = "Other";
-      var _name = document.getElementById("reportPointName").value;
+      var categ = document.getElementById("reportPointCateg").value;
+      var _name = document.getElementById("reportPointTitle").value;
       var _desc = document.getElementById("reportPointDesc").value;
       var loc = {lat:"",lon:""};
       var _uid = GUser.id;
@@ -64,7 +78,7 @@
       }
 
       // save for later
-      if(_uid != "")
+      if(_uid != "" && _name != "")
         getLocation();
     }
   </script>

@@ -161,3 +161,15 @@
   margin: .5rem 1rem;
   padding: .5rem 1rem;
 }
+
+#reportPointTitle {
+    width: 100%;
+    text-align: center;
+    font-size: 1.2rem;
+    border: none;
+}
+#reportPointDesc {
+    width: 100%;
+    min-height: 40px;
+    border: none;
+}
