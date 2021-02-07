@@ -1,5 +1,17 @@
 <?php
 
+class Marker{
+  public $Name;
+  public $lat;
+  public $lon;
+
+  public function __construct($Name, $lat, $lon){
+    $this->Name = $Name;
+    $this->lat = $lat;
+    $this->lon = $lon;
+  }
+}
+
 class API{
   public $Name;
   public $DisplayName;
@@ -9,7 +21,7 @@ class API{
   public $DataNameTitle;
   public $URL;
 
-  public function __construct($Name,$DisplayName,$Color,$URL="",$DataNameLat="latitude",$DataNameLon="longitude",$DataNameTitle="nom"){
+  public function __construct($Name,$DisplayName,$Color,$URL="",$DataNameLat="lat",$DataNameLon="lon",$DataNameTitle="Name"){
     $this->Name           = $Name;
     $this->DisplayName    = $DisplayName;
     $this->Color          = $Color;
@@ -17,6 +29,10 @@ class API{
     $this->DataNameLat    = $DataNameLat;
     $this->DataNameLon    = $DataNameLon;
     $this->DataNameTitle  = $DataNameTitle;
+
+    if($this->URL == ""){
+      $this->URL = "/api/markers/".$this->Name;
+    }
   }
 
   public function getClientFunctions(){
