@@ -60,6 +60,18 @@ class API{
     }
 
     function option".$this->Name."Show(){
+      function popupOpen(e) {
+        console.log(e) ;
+        macarte.fitBounds([e.target._latlng]);
+        document.getElementById('pinDescription').style.transform = 'translate(0)' ;
+        document.getElementById('pinDescriptionTitle').innerHTML = '".$this->Name."' ;
+      }
+
+      function popupClose(e) {
+        console.log(e) ;
+        document.getElementById('pinDescription').style.transform = '' ;
+      }
+
       console.log('show ".$this->Name."') ;
       if(".$this->Name."Pins.length != 0)
         return;
@@ -73,7 +85,9 @@ class API{
             color: '".$this->Color."'
           })
           .addTo(macarte)
-          .bindPopup('".$this->Name."<br>' + ".$this->Name."[site].".$this->DataNameTitle.");
+          .bindPopup('".$this->Name."<br>' + ".$this->Name."[site].".$this->DataNameTitle.")
+          .on('popupopen', popupOpen)
+          .on('popupclose', popupClose);
 
         ".$this->Name."Pins.push(marker);
       }

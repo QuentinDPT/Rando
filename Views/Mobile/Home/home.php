@@ -6,10 +6,23 @@
     <input id="searchBtn" type="button" name="" value="»">
   </div>
 </div>
+<div id="pinDescription">
+  <div>
+    <span id="pinDescriptionTitle">NOM</span><br>
+    <span id="pinDescriptionDescription">DESCRIPTION</span><br>
+    <span>Recommandations 90% (x votes)</span><br>
+    <span>Plus d'informations >></span>
+  </div>
+</div>
 <div id="pinOption" class="pinOption">
   <div>
     <div class="" style="max-height: 100%;display:flex;flex-direction:column;overflow-y:auto;overflow-x:hidden;">
-      <div style="margin-top:0;margin-left:1rem;margin-bottom:1rem;"><span style="font-size:24px;font-weight: 600;margin-right:2rem;">Marqueurs</span><span style="margin-right:2rem;">Aventures</span><span style="margin-right:2rem;">Compte</span></div>
+      <div style="margin-top:0;margin-left:1rem;margin-bottom:1rem;">
+        <span style="font-size:24px;font-weight: 600;margin-right:2rem;">Marqueurs</span>
+        <span style="margin-right:2rem;">Cartes</span>
+        <span style="margin-right:2rem;">Aventures</span>
+        <span style="margin-right:2rem;">Compte</span>
+      </div>
       <ul id="optionsContainer" class="optionsContainer">
         <?php require("pins.php") ?>
       </ul>

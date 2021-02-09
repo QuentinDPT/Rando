@@ -20,6 +20,7 @@ class MarkerController{
     $Rando = [];
     $Rando[] = new API("ViaFerrata","Via ferrata","#FF00FF");
     $Rando[] = new API("Compostelle","Compostelle","#FF00FF");
+    $Rando[] = new API("GR","GR","#FF00FF");
 
     $APIs[] = new APIsContainer("Randonné",$Rando);
 
@@ -32,7 +33,6 @@ class MarkerController{
 
     $Monuments = [];
     $Monuments[] = new API("Ruine","Ruine","#FF00FF");
-    $Monuments[] = new API("Chateau","Chateau","#FF00FF");
     $Monuments[] = new API("Bunker","Bunker","#FF00FF");
 
     $APIs[] = new APIsContainer("Monuments",$Monuments);
