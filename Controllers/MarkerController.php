@@ -65,7 +65,7 @@ class MarkerController{
 
   public function getMarkers($MarkerType){
     $bdd = MarkerController::GetBdd();
-    $request = "SELECT * FROM markers WHERE UPPER(MarkerType)=UPPER('". $MarkerType ."')" ;
+    $request = "SELECT * FROM Markers WHERE UPPER(MarkerType)=UPPER('". $MarkerType ."')" ;
     $markers = $bdd->select($request, []);
     $list = [];
     for ($i=0; $i < count($markers); $i++) {
@@ -80,7 +80,7 @@ class MarkerController{
 
   public function addMarker($MarkerCategory, $MarkerType, $UID, $lat, $lon, $Name, $Description){
     $bdd = MarkerController::GetBdd();
-    $req = "INSERT INTO markers (MarkerCategory, MarkerType, UID, lat, lon, Name, Description)
+    $req = "INSERT INTO Markers (MarkerCategory, MarkerType, UID, lat, lon, Name, Description)
             VALUES ('$MarkerCategory', '$MarkerType', '$UID', $lat, $lon, '$Name', '$Description')";
     $res = $bdd->insert($req, []);
     var_dump($res);

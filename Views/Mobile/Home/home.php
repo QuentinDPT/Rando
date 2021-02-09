@@ -10,8 +10,11 @@
   <div>
     <span id="pinDescriptionTitle">NOM</span><span id="pinDescriptionCategory">CATEG</span><br>
     <span id="pinDescriptionDescription">DESCRIPTION</span><br>
-    <span>Recommandations 90% (x votes)</span><br>
-    <span>Plus d'informations >></span>
+    <span>90% (x votes)</span>
+    <img src="">
+  </div>
+  <div>
+
   </div>
 </div>
 <div id="pinOption" class="pinOption">
