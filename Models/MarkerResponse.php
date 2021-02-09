@@ -62,9 +62,13 @@ class API{
     function option".$this->Name."Show(){
       function popupOpen(e) {
         console.log(e) ;
-        macarte.fitBounds([e.target._latlng]);
+        console.log(".$this->Name."[e.target.index]) ;
+        var pinSelected = ".$this->Name."[e.target.index];
+        macarte.setView([e.target._latlng.lat, e.target._latlng.lng]);
         document.getElementById('pinDescription').style.transform = 'translate(0)' ;
-        document.getElementById('pinDescriptionTitle').innerHTML = '".$this->Name."' ;
+        document.getElementById('pinDescriptionTitle').innerHTML = pinSelected.Name ;
+        document.getElementById('pinDescriptionCategory').innerHTML = '".$this->Name."' ;
+        document.getElementById('pinDescriptionDescription').innerHTML = pinSelected.Description ;
       }
 
       function popupClose(e) {
@@ -88,7 +92,7 @@ class API{
           .bindPopup('".$this->Name."<br>' + ".$this->Name."[site].".$this->DataNameTitle.")
           .on('popupopen', popupOpen)
           .on('popupclose', popupClose);
-
+        marker.index = site ;
         ".$this->Name."Pins.push(marker);
       }
     }

@@ -187,3 +187,8 @@
     transform: translateY(100%);
     transition: .7s;
 }
+#pinDescriptionCategory {
+  margin-left: 1rem;
+  vertical-align: text-top;
+  font-size: .7rem;
+}
