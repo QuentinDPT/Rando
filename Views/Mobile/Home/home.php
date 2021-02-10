@@ -17,15 +17,48 @@
 
   </div>
 </div>
+<script type="text/javascript">
+  function initMenu(e){
+    /*
+    document.getElementById("pinMenuTitles").innerHTML +=
+      document.getElementById("pinMenuTitles").innerHTML
+        .replace("markerMenuTitle","markerMenuTitle2")
+        .replace("mapMenuTitle","mapMenuTitle2")
+        .replace("advanturesMenuTitle","advanturesMenuTitle2")
+        .replace("accountMenuTitle","accountMenuTitle2") ;
+    //*/
+    document.getElementById("pinMenuTitles").innerHTML += "<div id='markerMenuTitle2' onclick='showMenu(this)'>Retour</div>" ;
+    document.getElementById("markerMenuTitle").style = "transform:scale(1)" ;
+  }
+
+  function showMenu(e){
+    console.log(e) ;
+    if(e.id.includes('2')){
+      showMenu(document.getElementById(e.id.substr(0,e.id.length-1)));
+      return;
+    }
+    document.getElementById("markerMenuTitle").style = "" ;
+    document.getElementById("mapMenuTitle").style = "" ;
+    document.getElementById("advanturesMenuTitle").style = "" ;
+    document.getElementById("accountMenuTitle").style = "" ;
+
+    e.style.transform = "scale(1)" ;
+
+    document.getElementById("pinMenuTitles").style = "transform:translateX(-"+e.offsetLeft+"px)";
+  }
+</script>
 <div id="pinOption" class="pinOption">
   <div>
     <div class="" style="max-height: 100%;display:flex;flex-direction:column;overflow-y:auto;overflow-x:hidden;">
-      <div style="margin-top:0;margin-left:1rem;margin-bottom:1rem;">
-        <span style="font-size:24px;font-weight: 600;margin-right:2rem;">Marqueurs</span>
-        <span style="margin-right:2rem;">Cartes</span>
-        <span style="margin-right:2rem;">Aventures</span>
-        <span style="margin-right:2rem;">Compte</span>
+      <div id="pinMenuTitles" class="pinMenuTitles">
+        <div id="markerMenuTitle" onclick="showMenu(this)">Marqueurs</div>
+        <div id="mapMenuTitle" onclick="showMenu(this)">Cartes</div>
+        <div id="advanturesMenuTitle" onclick="showMenu(this)">Aventures</div>
+        <div id="accountMenuTitle" onclick="showMenu(this)">Compte</div>
       </div>
+      <script type="text/javascript">
+        initMenu();
+      </script>
       <ul id="optionsContainer" class="optionsContainer">
         <?php require("pins.php") ?>
       </ul>

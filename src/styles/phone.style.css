@@ -192,3 +192,17 @@
   vertical-align: text-top;
   font-size: .7rem;
 }
+
+.pinMenuTitles{
+  margin-top:0;
+  margin-left:1rem;
+  margin-bottom:1rem;
+  transition:.4s;
+  display: flex;
+}
+
+.pinMenuTitles>div{
+  font-size: 22px;
+  transform: scale(.8);
+  width:100%;
+}
