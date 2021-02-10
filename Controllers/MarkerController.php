@@ -1,7 +1,8 @@
 <?php
 
 require("Models/MarkerResponse.php");
-require("Models/AccessDB.php");
+require("Models/Marker.php");
+require_once("Models/AccessDB.php");
 
 class MarkerController{
   public function __construct(){
@@ -60,20 +61,26 @@ class MarkerController{
     $APIs[] = new APIsContainer("FFVL",$FFVL);
     $APIs[] = new APIsContainer("Autre",[new API("Other","Autre","#FF00FF")]);
 
-    return $APIs ;
+    //return $APIs ;
+    return [];
   }
 
   public function getMarkers($MarkerType){
     $bdd = MarkerController::GetBdd();
-    $request = "SELECT * FROM Markers WHERE UPPER(MarkerType)=UPPER('". $MarkerType ."')" ;
+    $request = "SELECT * FROM Markers WHERE CategoryID=(SELECT CategID from Categories where UPPER(DataName)=UPPER('". $MarkerType ."'))" ;
     $markers = $bdd->select($request, []);
     $list = [];
     for ($i=0; $i < count($markers); $i++) {
-        $list[] = new Marker(
-            $markers[$i]["Name"],
-            $markers[$i]["lat"],
-            $markers[$i]["lon"]
-        );
+      $list[] = new Marker(
+        $markers[$i]["MarkerID"],
+        $markers[$i]["Name"],
+        $markers[$i]["Description"],
+        $markers[$i]["lat"],
+        $markers[$i]["lon"],
+        $markers[$i]["UID"],
+        $markers[$i]["CategoryID"],
+        $markers[$i]["ImageID"]
+      );
     }
     return $list;
   }
@@ -91,14 +98,4 @@ class MarkerController{
     }
   }
 
-  public function exist($markerString){
-    $markers = $this->getAllMarkers();
-    for ($i=0; $i < count($markers); $i++) {
-      for ($j=0; $j < count($markers[$i]->APIs); $j++){
-        if($markers[$i]->APIs[$j]->Name == $markerString)
-          return true;
-      }
-    }
-    return false;
-  }
 }

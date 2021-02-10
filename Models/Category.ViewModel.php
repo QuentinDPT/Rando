@@ -1,26 +1,15 @@
 <?php
 
-class API{
-  public $Name;
-  public $DisplayName;
-  public $Color ;
-  public $DataNameLat;
-  public $DataNameLon;
-  public $DataNameTitle;
-  public $URL;
+class CategoryViewModel{
 
-  public function __construct($Name,$DisplayName,$Color,$URL="",$DataNameLat="lat",$DataNameLon="lon",$DataNameTitle="Name"){
-    $this->Name           = $Name;
-    $this->DisplayName    = $DisplayName;
-    $this->Color          = $Color;
-    $this->URL            = $URL;
-    $this->DataNameLat    = $DataNameLat;
-    $this->DataNameLon    = $DataNameLon;
-    $this->DataNameTitle  = $DataNameTitle;
+  public $CategoryID;
+  public $CategoryName;
+   
+  public $CategoryDataName;
+  public $CategoryDisplayName;
 
-    if($this->URL == ""){
-      $this->URL = "/api/markers/".$this->Name;
-    }
+  public function __construct(){
+
   }
 
   public function getClientFunctions(){
@@ -91,18 +80,5 @@ class API{
       }
       ".$this->Name."Pins = [] ;
     }" ;
-  }
-};
-
-
-
-
-class APIsContainer{
-  public $Name;
-  public $APIs;
-
-  public function __construct($Name, $APIs){
-    $this->Name = $Name;
-    $this->APIs = $APIs;
   }
 }

@@ -1,5 +1,5 @@
 <?php
-  //require("Controllers/MarkerController.php");
+  require("Controllers/MarkerController.php");
   $markersType = (new MarkerController())->getAllMarkers();
 ?>
 <div id="addPinSection" class="addPinSection" style="display:none;">
