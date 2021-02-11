@@ -10,6 +10,7 @@
 
 <script type="text/javascript">
   var GUser = {id:"",name:"",avatar:"",mail:""} ;
+  var UID = 0 ;
 </script>
 <script src="/src/js/glog.js" charset="utf-8"></script>
 <script src="/src/js/phone.js" charset="utf-8"></script>

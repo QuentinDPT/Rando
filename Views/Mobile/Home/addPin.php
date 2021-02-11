@@ -34,7 +34,7 @@
       var _name = document.getElementById("reportPointTitle").value;
       var _desc = document.getElementById("reportPointDesc").value;
       var loc = {lat:"",lon:""};
-      var _uid = GUser.id;
+      var _uid = UID;
 
       // get location
       function getLocation(){

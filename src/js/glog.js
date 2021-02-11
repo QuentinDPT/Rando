@@ -3,13 +3,6 @@ gapi.load("auth2",function(){
 
 });
 
-/*
-  $data["Name"],
-  $data["EMail"],
-  $data["GoogleUID"],
-  $data["ImageURL"]
-//*/
-
 function onSignIn(googleUser) {
   var profile = googleUser.getBasicProfile();
 
@@ -32,9 +25,11 @@ function onSignIn(googleUser) {
     success: function(result){
       if(userMarker)
         userMarker._icon.src = result.Image ;
+      UID = result ;
       signIn();
     },
     error : function(resultat, statut, erreur){
+      UID = 0 ;
       signOut();
     }
   }) ;

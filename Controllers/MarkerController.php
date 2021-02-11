@@ -61,14 +61,13 @@ class MarkerController{
     return $list;
   }
 
-  public function addMarker($MarkerCategory, $MarkerType, $UID, $lat, $lon, $Name, $Description){
+  public function addMarker($CategoryID, $UID, $lat, $lon, $Name, $Description){
     $bdd = MarkerController::GetBdd();
-    $req = "INSERT INTO Markers (MarkerCategory, MarkerType, UID, lat, lon, Name, Description)
-            VALUES ('$MarkerCategory', '$MarkerType', '$UID', $lat, $lon, '$Name', '$Description')";
+    $req = "INSERT INTO Markers (CategoryID, UID, lat, lon, Name, Description)
+            VALUES ($CategoryID, $UID, $lat, $lon, '$Name', '$Description')";
     $res = $bdd->insert($req, []);
-    var_dump($res);
 
-    if ($res === false) {
+    if ($res === false || $res == 0) {
       echo "Error while executing request";
       die();
     }

@@ -13,7 +13,6 @@ if($CurrentURL->get(2) == "add"){
   $data = json_decode(file_get_contents('php://input'), true);
   (new MarkerController())->addMarker(
     $data["category"],
-    $data["category"],
     $data["uid"],
     $data["location"]["lat"],
     $data["location"]["lon"],
