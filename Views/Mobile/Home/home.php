@@ -64,7 +64,7 @@
       </ul>
     </div>
     <div class="additionnalMenu">
-      <div id="report" onclick="document.getElementById('addPinSection').style = '';" class="button" style="display:none;">
+      <div id="report" onclick="document.getElementById('addPinSection').style = '';" class="button" style="opacity:0;pointer-events: none;">
         <span style="padding-left:.4rem">🗺️</span>
         <span class='abcRioButtonContents'>Report</span>
       </div>

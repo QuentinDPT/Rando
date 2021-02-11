@@ -29,7 +29,7 @@ function signOut() {
     document.getElementById("signin").style.display = "" ;
     document.getElementById("signout").style.display = "none" ;
     document.getElementById("signout").innerHTML = "" ;
-    document.getElementById("report").style = "display:none;" ;
+    document.getElementById("report").style = "opacity:0;pointer-events: none;" ;
   });
   if(userMarker)
     userMarker._icon.src = "/src/img/bobby.png" ;

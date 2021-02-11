@@ -82,7 +82,6 @@
 .additionnalMenu{
   margin: .5rem;
   display:flex;
-  justify-content: end;
 }
 
 .optionsContainer{
