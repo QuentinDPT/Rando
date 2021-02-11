@@ -18,7 +18,6 @@
         <?php
         foreach ($markersType as $apiContainer) {
           foreach ($apiContainer->APIs as $api) {
-            var_dump($api) ;
             echo "<option value='".$api->DataName."'>".$api->DisplayName."</option>" ;
           }
         }
