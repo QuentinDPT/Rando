@@ -43,7 +43,7 @@ function onSignIn(googleUser) {
 function signIn(){
   document.getElementById("signin").style.display = "none" ;
   document.getElementById("signout").style.display = "" ;
-  document.getElementById("signout").innerHTML = "<span style='font-size: 13px; line-height: 34px;color: #757575;' class='abcRioButtonContents'>Sign out</span><img src='" + profile.getImageUrl() + "'>"
+  document.getElementById("signout").innerHTML = "<span style='font-size: 13px; line-height: 34px;color: #757575;' class='abcRioButtonContents'>Sign out</span><img src='" + GUser.avatar + "'>"
 
   document.getElementById("report").style = "" ;
 }
