@@ -1,5 +1,7 @@
 <?php
 
+require("Controllers/UserController.php");
+
 if($CurrentURL->size() == 2){
   new Error404($CurrentURL);
   die() ;
@@ -7,14 +9,14 @@ if($CurrentURL->size() == 2){
 
 if($CurrentURL->get(2) == "log"){
   $data = json_decode(file_get_contents('php://input'), true);
-  (new UserController())->logUser(
-    $data["category"],
-    $data["category"],
-    $data["uid"],
-    $data["location"]["lat"],
-    $data["location"]["lon"],
-    $data["name"],
-    $data["description"]
+  header('Content-type: application/json');
+  echo json_encode(
+    (new UserController())->logUser(
+      $data["Name"],
+      $data["EMail"],
+      $data["GoogleUID"],
+      $data["ImageURL"]
+    )
   );
   die();
 }

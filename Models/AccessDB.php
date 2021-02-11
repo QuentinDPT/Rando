@@ -69,8 +69,28 @@ class AccessDB {
         }
         else return false;
     }
+
+    function execInsert($request, $data){
+        if (empty($request) || !is_array($data)) {
+            throw new UnexpectedValueException("argument invalid");
+            die();
+        }
+
+        $query = $this->_db->prepare($request);
+        if ($data) {
+            foreach ($data as $key => $value){
+                $query->bindValue(":$key", $value);
+            }
+        }
+        if ($query) {
+            $query->execute();
+            return $this->_db->lastInsertId() ;
+        }
+        else return false;
+    }
+
     /* insert: Alias for execReq */
-    function insert($request, $data){ return $this->execReq($request, $data); }
+    function insert($request, $data){ return $this->execInsert($request, $data); }
     /* update: Alias for execReq */
     function update($request, $data){ return $this->execReq($request, $data); }
     /* delete: Alias for execReq */
