@@ -21,7 +21,7 @@ function onSignIn(googleUser) {
 
   $.ajax({
     type: "POST",
-    url:'/api/markers/add',
+    url:'/api/users/log',
     contentType: 'application/json',
     data: JSON.stringify({
       "Name":GUser.name,
