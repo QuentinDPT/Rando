@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : g21w3.myd.infomaniak.com
--- Généré le :  mar. 09 fév. 2021 à 22:26
+-- Généré le :  jeu. 11 fév. 2021 à 11:19
 -- Version du serveur :  5.7.32-log
 -- Version de PHP :  7.4.14
 
@@ -75,7 +75,8 @@ CREATE TABLE `Images` (
 --
 
 INSERT INTO `Images` (`ImageID`, `UID`, `URL`) VALUES
-(1, 1, 'https://www.depannelec-52.fr/images/no-image.png');
+(1, 1, 'https://www.depannelec-52.fr/images/no-image.png'),
+(4, 1, '/src/users/admin-chapelle.png');
 
 -- --------------------------------------------------------
 
@@ -86,8 +87,6 @@ INSERT INTO `Images` (`ImageID`, `UID`, `URL`) VALUES
 CREATE TABLE `Markers` (
   `MarkerID` int(11) NOT NULL,
   `CategoryID` int(11) NOT NULL,
-  `MarkerCategory` varchar(50) NOT NULL,
-  `MarkerType` varchar(50) NOT NULL,
   `UID` int(11) NOT NULL,
   `lat` float NOT NULL,
   `lon` float NOT NULL,
@@ -100,10 +99,16 @@ CREATE TABLE `Markers` (
 -- Déchargement des données de la table `Markers`
 --
 
-INSERT INTO `Markers` (`MarkerID`, `CategoryID`, `MarkerCategory`, `MarkerType`, `UID`, `lat`, `lon`, `Name`, `Description`, `ImageID`) VALUES
-(1, 10, 'Monuments', 'Ruine', 1, 48.2945, 7.38842, 'Château de Ramstein', 'Château de Ramstein', 1),
-(2, 10, 'Monuments', 'Ruine', 1, 48.3219, 7.39978, 'Château du Bernstein', 'Château du Bernstein', 1),
-(3, 10, 'Monuments', 'Ruine', 1, 48.2958, 7.39214, 'Château de l\'Ortenbourg', 'Château de l\'Ortenbourg', 1);
+INSERT INTO `Markers` (`MarkerID`, `CategoryID`, `UID`, `lat`, `lon`, `Name`, `Description`, `ImageID`) VALUES
+(1, 10, 1, 48.2945, 7.38842, 'Château de Ramstein', 'Château de Ramstein', 1),
+(2, 10, 1, 48.3219, 7.39978, 'Château du Bernstein', 'Château du Bernstein', 1),
+(3, 10, 1, 48.2958, 7.39214, 'Château de l\'Ortenbourg', 'Château de l\'Ortenbourg', 1),
+(6, 4, 1, 48.9784, 7.82665, 'Refuge du Soultzerkopf', 'Refuge gratuit, de quoi faire du feu, pas d\'electricité', 1),
+(7, 8, 1, 49.0326, 7.76921, 'Lac du Fleckenstein', 'Baignade toléré, non surveillée.', 1),
+(8, 5, 1, 48.3263, 7.39418, 'Bivouac cheval', 'Possibilité de dormir à l\'abri de la pluie', 1),
+(9, 5, 1, 48.2923, 7.38782, 'Bivouac chappelle', 'Possibilité de dormir dans la chapelle. Elle est en ruine, mais peut protéger de la pluie', 4),
+(10, 6, 1, 48.9476, 7.88778, 'Robinet cimetière', 'Robinet d\'eau à l’intérieur du cimetière', 1),
+(11, 7, 1, 48.9517, 7.60222, 'Source tuyau', 'Source sortante d\'un tuyau', 1);
 
 -- --------------------------------------------------------
 
@@ -130,6 +135,45 @@ INSERT INTO `Users` (`UserID`, `GoogleUID`, `ImageID`, `Name`, `EMail`, `Verrifi
 -- --------------------------------------------------------
 
 --
+-- Doublure de structure pour la vue `ViewMarker`
+-- (Voir ci-dessous la vue réelle)
+--
+CREATE TABLE `ViewMarker` (
+`MarkerID` int(11)
+,`Name` varchar(50)
+,`Description` varchar(120)
+,`CategoryID` int(11)
+,`CategoryName` varchar(30)
+,`DataName` varchar(30)
+,`DisplayName` varchar(40)
+,`Color` varchar(7)
+,`lat` float
+,`lon` float
+,`ImageID` int(11)
+,`ImageURL` varchar(200)
+,`UID` int(11)
+,`nbVotes` bigint(21)
+,`avgVotes` decimal(14,4)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Doublure de structure pour la vue `ViewUser`
+-- (Voir ci-dessous la vue réelle)
+--
+CREATE TABLE `ViewUser` (
+`UserID` int(11)
+,`GoogleUID` int(11)
+,`Name` varchar(30)
+,`EMail` varchar(30)
+,`Verrified` char(1)
+,`ImageURL` varchar(200)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `Votes`
 --
 
@@ -139,6 +183,24 @@ CREATE TABLE `Votes` (
   `MarkerID` int(11) NOT NULL,
   `Note` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la vue `ViewMarker`
+--
+DROP TABLE IF EXISTS `ViewMarker`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`g21w3_admin`@`%` SQL SECURITY DEFINER VIEW `ViewMarker`  AS SELECT `m`.`MarkerID` AS `MarkerID`, `m`.`Name` AS `Name`, `m`.`Description` AS `Description`, `m`.`CategoryID` AS `CategoryID`, `c`.`CategoryName` AS `CategoryName`, `c`.`DataName` AS `DataName`, `c`.`DisplayName` AS `DisplayName`, `c`.`Color` AS `Color`, `m`.`lat` AS `lat`, `m`.`lon` AS `lon`, `m`.`ImageID` AS `ImageID`, `i`.`URL` AS `ImageURL`, `m`.`UID` AS `UID`, (select count(0) from `Votes` `v` where (`v`.`MarkerID` = `m`.`MarkerID`)) AS `nbVotes`, (select avg(`v`.`Note`) from `Votes` `v` where (`v`.`MarkerID` = `m`.`MarkerID`)) AS `avgVotes` FROM ((`Markers` `m` join `Images` `i`) join `Categories` `c`) WHERE ((`m`.`CategoryID` = `c`.`CategID`) AND (`m`.`ImageID` = `i`.`ImageID`)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la vue `ViewUser`
+--
+DROP TABLE IF EXISTS `ViewUser`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`g21w3_admin`@`%` SQL SECURITY DEFINER VIEW `ViewUser`  AS SELECT `u`.`UserID` AS `UserID`, `u`.`GoogleUID` AS `GoogleUID`, `u`.`Name` AS `Name`, `u`.`EMail` AS `EMail`, `u`.`Verrified` AS `Verrified`, `i`.`URL` AS `ImageURL` FROM (`Users` `u` left join `Images` `i` on((`u`.`ImageID` = `i`.`ImageID`))) ;
 
 --
 -- Index pour les tables déchargées
@@ -156,7 +218,7 @@ ALTER TABLE `Categories`
 --
 ALTER TABLE `Images`
   ADD PRIMARY KEY (`ImageID`),
-  ADD UNIQUE KEY `UID` (`UID`);
+  ADD KEY `UID` (`UID`);
 
 --
 -- Index pour la table `Markers`
@@ -196,13 +258,13 @@ ALTER TABLE `Categories`
 -- AUTO_INCREMENT pour la table `Images`
 --
 ALTER TABLE `Images`
-  MODIFY `ImageID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ImageID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `Markers`
 --
 ALTER TABLE `Markers`
-  MODIFY `MarkerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `MarkerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pour la table `Users`
