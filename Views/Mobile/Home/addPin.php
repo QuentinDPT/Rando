@@ -18,6 +18,7 @@
         <?php
         foreach ($markersType as $apiContainer) {
           foreach ($apiContainer->APIs as $api) {
+            var_dump($api) ;
             echo "<option value='".$api->Name."'>".$api->DisplayName."</option>" ;
           }
         }
@@ -34,7 +35,7 @@
       var _name = document.getElementById("reportPointTitle").value;
       var _desc = document.getElementById("reportPointDesc").value;
       var loc = {lat:"",lon:""};
-      var _uid = UID;
+      var _uid = UID.UserID;
 
       // get location
       function getLocation(){
