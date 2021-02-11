@@ -53,18 +53,16 @@ function getCategoriesClientFunction($category){
 
   function option".$category->DataName."Show(){
     function popupOpen(e) {
-      console.log(e) ;
-      console.log(".$category->DataName."[e.target.index]) ;
       var pinSelected = ".$category->DataName."[e.target.index];
       macarte.setView([e.target._latlng.lat, e.target._latlng.lng]);
       document.getElementById('pinDescription').style.transform = 'translate(0)' ;
       document.getElementById('pinDescriptionTitle').innerHTML = pinSelected.Name ;
       document.getElementById('pinDescriptionCategory').innerHTML = '".$category->DataName."' ;
       document.getElementById('pinDescriptionDescription').innerHTML = pinSelected.Description ;
+      document.getElementById('pinDescriptionVotes').innerHTML = 'Votes : ' + (pinSelected.avgVotes*100) + '% (' + pinSelected.nbVotes + ')';
     }
 
     function popupClose(e) {
-      console.log(e) ;
       document.getElementById('pinDescription').style.transform = '' ;
     }
 
@@ -89,7 +87,6 @@ function getCategoriesClientFunction($category){
     }
   }
   function option".$category->DataName."Hide(){
-    console.log('hide ".$category->DataName."') ;
     for (var pin of ".$category->DataName."Pins) {
       pin.remove();
     }

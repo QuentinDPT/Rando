@@ -1,7 +1,7 @@
 <?php
 
-require("Models/MarkerResponse.php");
 require("Models/Marker.php");
+require("Models/Marker.ViewModel.php");
 require_once("Models/AccessDB.php");
 
 class MarkerController{
@@ -13,56 +13,6 @@ class MarkerController{
     $bdd = new AccessDB();
     $bdd->connect();
     return $bdd;
-  }
-
-  public function getAllMarkers(){
-    $APIs = [];
-
-    $Rando = [];
-    $Rando[] = new API("ViaFerrata","Via ferrata","#FF00FF");
-    $Rando[] = new API("Compostelle","Compostelle","#FF00FF");
-    $Rando[] = new API("GR","GR","#FF00FF");
-
-    $APIs[] = new APIsContainer("Randonné",$Rando);
-
-    $Life = [];
-    $Life[] = new API("Refuge","Refuge","#FF00FF");
-    $Life[] = new API("Bivouac","Lieu de bivouac","#FF00FF");
-    $Life[] = new API("Camp","Camping","#FF00FF");
-
-    $APIs[] = new APIsContainer("Lieu de vie",$Life);
-
-    $Monuments = [];
-    $Monuments[] = new API("Ruine","Ruine","#FF00FF");
-    $Monuments[] = new API("Bunker","Bunker","#FF00FF");
-
-    $APIs[] = new APIsContainer("Monuments",$Monuments);
-
-    $Water = [];
-    $Water[] = new API("WaterDrinkable","Eau potable","#FF00FF");
-    $Water[] = new API("WaterSpring","Source d'eau","#FF00FF");
-    $Water[] = new API("WaterBathing","Lieu de baignade","#FF00FF");
-    $Water[] = new API("WaterFalls","Cascade","#FF00FF");
-
-    $APIs[] = new APIsContainer("Eau",$Water);
-
-    $Weather = [] ;
-    $Weather[] = new API("Temps","Températures","#FF00FF");
-    $Weather[] = new API("Rain","Précipitations","#FF00FF");
-    $Weather[] = new API("Wind","Vent","#FF00FF");
-
-    $APIs[] = new APIsContainer("Météo",$Weather);
-
-    $FFVL = [] ;
-    $FFVL[] = new API("Sites","Sites","#0000FF","https://data.ffvl.fr/json/sites.json","lat","lon","nom");
-    $FFVL[] = new API("Balises","Balises","#00FF00","https://data.ffvl.fr/json/balises.json","latitude","longitude","nom");
-    $FFVL[] = new API("Structures","Structures","#FFA500","https://data.ffvl.fr/json/structures.json","STRU_LATITUDE","STRU_LONGITUDE","STRU_NOM");
-
-    $APIs[] = new APIsContainer("FFVL",$FFVL);
-    $APIs[] = new APIsContainer("Autre",[new API("Other","Autre","#FF00FF")]);
-
-    //return $APIs ;
-    return [];
   }
 
   public function getMarkers($MarkerType){
@@ -80,6 +30,32 @@ class MarkerController{
         $markers[$i]["UID"],
         $markers[$i]["CategoryID"],
         $markers[$i]["ImageID"]
+      );
+    }
+    return $list;
+  }
+
+  public function getMarkerViewModel($MarkerType){
+    $bdd = MarkerController::GetBdd();
+    $request = "SELECT * FROM ViewMarker WHERE UPPER(DataName)=UPPER('". $MarkerType ."')" ;
+    $markers = $bdd->select($request, []);
+    $list = [];
+    for ($i=0; $i < count($markers); $i++) {
+      $list[] = new MarkerViewModel(
+        $markers[$i]["MarkerID"],
+        $markers[$i]["Name"],
+        $markers[$i]["Description"],
+        $markers[$i]["CategoryID"],
+        $markers[$i]["CategoryName"],
+        $markers[$i]["DataName"],
+        $markers[$i]["Color"],
+        $markers[$i]["lat"],
+        $markers[$i]["lon"],
+        $markers[$i]["ImageID"],
+        $markers[$i]["ImageURL"],
+        $markers[$i]["UID"],
+        $markers[$i]["nbVotes"],
+        $markers[$i]["avgVotes"]
       );
     }
     return $list;

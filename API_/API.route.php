@@ -10,6 +10,9 @@ switch($CurrentURL->get(1)){
   case "users":
     require("API_/Users/users.route.php") ;
     break ;
+  case "proximity" :
+    die() ;
+    break ;
   default:
     new Error404();
     break ;

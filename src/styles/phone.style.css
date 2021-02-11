@@ -82,6 +82,7 @@
 .additionnalMenu{
   margin: .5rem;
   display:flex;
+  justify-content: end;
 }
 
 .optionsContainer{
@@ -205,4 +206,10 @@
   font-size: 22px;
   transform: scale(.8);
   width:100%;
+}
+
+#report{
+  width:100%;
+  margin-right:.5rem;
+  min-width:120px;
 }

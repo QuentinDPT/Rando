@@ -51,4 +51,4 @@ switch($CurrentURL->get(2)){
 }
 
 header('Content-type: application/json');
-echo json_encode( (new MarkerController())->getMarkers($CurrentURL->get(2)) );
+echo json_encode( (new MarkerController())->getMarkerViewModel($CurrentURL->get(2)) );

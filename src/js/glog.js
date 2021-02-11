@@ -17,6 +17,8 @@ function onSignIn(googleUser) {
   document.getElementById("signout").style.display = "" ;
   document.getElementById("signout").innerHTML = "<span style='font-size: 13px; line-height: 34px;color: #757575;' class='abcRioButtonContents'>Sign out</span><img src='" + profile.getImageUrl() + "'>"
 
+  document.getElementById("report").style = "" ;
+
   if(userMarker)
     userMarker._icon.src = GUser.avatar ;
 }
@@ -27,6 +29,7 @@ function signOut() {
     document.getElementById("signin").style.display = "" ;
     document.getElementById("signout").style.display = "none" ;
     document.getElementById("signout").innerHTML = "" ;
+    document.getElementById("report").style = "display:none;" ;
   });
   if(userMarker)
     userMarker._icon.src = "/src/img/bobby.png" ;

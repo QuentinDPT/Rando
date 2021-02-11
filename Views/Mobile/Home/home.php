@@ -10,7 +10,7 @@
   <div>
     <span id="pinDescriptionTitle">NOM</span><span id="pinDescriptionCategory">CATEG</span><br>
     <span id="pinDescriptionDescription">DESCRIPTION</span><br>
-    <span>90% (x votes)</span>
+    <span id="pinDescriptionVotes">?</span>
     <img src="">
   </div>
   <div>
@@ -64,7 +64,7 @@
       </ul>
     </div>
     <div class="additionnalMenu">
-      <div id="report" onclick="document.getElementById('addPinSection').style = '';" class="button" style="width:100%; margin-right:.5rem;min-width:120px;">
+      <div id="report" onclick="document.getElementById('addPinSection').style = '';" class="button" style="display:none;">
         <span style="padding-left:.4rem">🗺️</span>
         <span class='abcRioButtonContents'>Report</span>
       </div>

@@ -4,7 +4,7 @@ class CategoryViewModel{
 
   public $CategoryID;
   public $CategoryName;
-   
+
   public $CategoryDataName;
   public $CategoryDisplayName;
 
@@ -38,7 +38,6 @@ class CategoryViewModel{
 
     function option".$this->Name."Show(){
       function popupOpen(e) {
-        console.log(e) ;
         console.log(".$this->Name."[e.target.index]) ;
         var pinSelected = ".$this->Name."[e.target.index];
         macarte.setView([e.target._latlng.lat, e.target._latlng.lng]);
@@ -46,14 +45,13 @@ class CategoryViewModel{
         document.getElementById('pinDescriptionTitle').innerHTML = pinSelected.Name ;
         document.getElementById('pinDescriptionCategory').innerHTML = '".$this->Name."' ;
         document.getElementById('pinDescriptionDescription').innerHTML = pinSelected.Description ;
+        document.getElementById('pinDescriptionVotes').innerHTML = (pinSelected.avgVotes*100) + '% (' + pinSelected.nbVotes + ')';
       }
 
       function popupClose(e) {
-        console.log(e) ;
         document.getElementById('pinDescription').style.transform = '' ;
       }
 
-      console.log('show ".$this->Name."') ;
       if(".$this->Name."Pins.length != 0)
         return;
 
@@ -74,7 +72,6 @@ class CategoryViewModel{
       }
     }
     function option".$this->Name."Hide(){
-      console.log('hide ".$this->Name."') ;
       for (var pin of ".$this->Name."Pins) {
         pin.remove();
       }
