@@ -18,7 +18,7 @@
         <?php
         foreach ($markersType as $apiContainer) {
           foreach ($apiContainer->APIs as $api) {
-            echo "<option value='".$api->DataName."'>".$api->DisplayName."</option>" ;
+            echo "<option value='".$api->ID."'>".$api->DisplayName."</option>" ;
           }
         }
         ?>
